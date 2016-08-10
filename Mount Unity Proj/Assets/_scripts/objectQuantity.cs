@@ -21,10 +21,12 @@ public class objectQuantity : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyDown (KeyCode.Space)) {
+		if (quantity.timer == 0) {
 			generateObject ();
 		}
-	
+
+		if(Input.GetKeyDown ( KeyCode.Space))
+			generateObject ();
 	}
 
 	void generateObject(){
