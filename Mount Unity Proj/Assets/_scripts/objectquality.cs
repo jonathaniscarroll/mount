@@ -26,11 +26,6 @@ public class objectquality : MonoBehaviour {
 		if ( Input.GetKeyDown (KeyCode.Space) ){
 			roll = Random.value * 100;
 			//script name dot variable within said script fucking A
-			if ( roll >= quality.likes ){
-				Debug.Log(quality.likes );
-			} else {
-				Debug.Log(false);
-			}
 		};
 
 		//determine if object generated will be high or low quality
