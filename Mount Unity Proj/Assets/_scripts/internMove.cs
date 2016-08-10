@@ -3,17 +3,24 @@ using System.Collections;
 
 public class internMove : MonoBehaviour {
 
-	private Transform goal;
+	private Vector3 goal;
 	private NavMeshAgent agent;
 
 	void Start () {
+		newGoal ();
 		agent = GetComponent<NavMeshAgent> ();
-		agent.destination = Random.insideUnitCircle * 5; 
+		agent.destination = goal; 
 	}
 
 	void Update (){
-		if (agent.remainingDistance < 0.5f)
-			agent.destination = Random.insideUnitCircle * 5; 
+		if (agent.remainingDistance < 0.5f) {
+			newGoal ();
+			agent.destination = goal; 
+		}
+	}
+
+	void newGoal () {
+		goal = new Vector3 (Random.Range (-5.0f, 5.0f), 0, Random.Range (-5.0f, 5.0f));
 	}
 		
 }
