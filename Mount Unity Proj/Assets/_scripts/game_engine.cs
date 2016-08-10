@@ -5,6 +5,7 @@ using System.Collections;
 public class game_engine : MonoBehaviour {
 	private int likes;
 	private int posts;
+
 	public Text likeText;
 	public Text postText;
 	// Use this for initialization
@@ -31,5 +32,9 @@ public class game_engine : MonoBehaviour {
 	void setText(){
 		likeText.text = "likes = " + likes.ToString();
 		postText.text = "posts = " + posts.ToString();
+	}
+
+	void generateObject(){
+
 	}
 }
