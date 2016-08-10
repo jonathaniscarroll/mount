@@ -3,24 +3,53 @@ using System.Collections;
 
 public class internMove : MonoBehaviour {
 
-	private Vector3 goal;
-	private NavMeshAgent agent;
+	public Vector3 goal;
+	public NavMeshAgent agent;
+	public GameObject intern;
+	//action bool - if set to 0, walk around, otherwise, perform object related action for 10 seconds
+	public bool action;
+
+	public GameObject detection;
+	public interaction interacting;
 
 	void Start () {
+		action = false;
 		newGoal ();
 		agent = GetComponent<NavMeshAgent> ();
 		agent.destination = goal; 
+
+		interacting = detection.GetComponent<interaction>();
 	}
 
 	void Update (){
-		if (agent.remainingDistance < 0.5f) {
-			newGoal ();
-			agent.destination = goal; 
+		//Debug.Log(intern.transform.position);
+		if(action == false){
+			agent.speed = 3.5f;
+			agent.angularSpeed = 120;
+			agent.acceleration = 8;
+			if (agent.remainingDistance < 0.5f) {
+				newGoal ();
+				agent.destination = goal;
+			} 
 		}
+			if (action == true){
+				newGoal();
+				agent.speed = 0.0f;
+				agent.angularSpeed = 0;
+			}
+		if(interacting.counter == 0){
+			action = false;
+			newGoal();
+		}
+		Debug.Log(action);
 	}
 
 	void newGoal () {
-		goal = new Vector3 (Random.Range (-5.0f, 5.0f), 0, Random.Range (-5.0f, 5.0f));
+		if(action == false){
+			goal = new Vector3 (Random.Range (-5.0f, 5.0f), 0, Random.Range (-5.0f, 5.0f));
+		}
+		if(action == true){
+			goal = new Vector3 (gameObject.transform.position.x,gameObject.transform.position.y,gameObject.transform.position.z);
+		}
 	}
-		
 }
