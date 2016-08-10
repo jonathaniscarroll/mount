@@ -87,5 +87,6 @@
 -define:UNITY_TEAM_LICENSE
 'Assets/_scripts/game_engine.cs'
 'Assets/_scripts/internMove.cs'
+'Assets/_scripts/text.cs'
 -r:'/Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity/System.Runtime.Serialization.dll'
 -r:'/Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity/System.Xml.Linq.dll'
