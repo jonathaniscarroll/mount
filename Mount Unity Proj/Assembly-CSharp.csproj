@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\_scripts\cubicleObjectGeneration.cs" />
      <Compile Include="Assets\_scripts\game_engine.cs" />
      <Compile Include="Assets\_scripts\internMove.cs" />
  <Reference Include="UnityEngine.UI">
