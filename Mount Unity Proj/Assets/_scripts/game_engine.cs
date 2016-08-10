@@ -3,8 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class game_engine : MonoBehaviour {
-	private int likes;
-	private int posts;
+	public int likes;
+	public int posts;
 
 	public Text likeText;
 	public Text postText;
