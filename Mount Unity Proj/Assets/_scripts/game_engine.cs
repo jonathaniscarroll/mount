@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class game_engine : MonoBehaviour {
-	int timer = 0;
+	int likes = 0;
+	int posts = 0;
 	// Use this for initialization
 	void Start () {
 
@@ -10,7 +11,15 @@ public class game_engine : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		timer += 1;
-		Debug.Log(timer);
+
+		if ( Input.GetKeyDown ( KeyCode.P )){
+			posts += 1;
+			Debug.Log(posts);
+		}
+
+		if ( Input.GetKeyDown ( KeyCode.L )){
+			likes += 1;
+			Debug.Log(likes);
+		}
 	}
 }
