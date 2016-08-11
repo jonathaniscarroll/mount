@@ -22,7 +22,6 @@ public class internMove : MonoBehaviour {
 	}
 
 	void Update (){
-		//Debug.Log(intern.transform.position);
 		if(action == false){
 			agent.speed = 3.5f;
 			agent.angularSpeed = 120;
@@ -36,12 +35,13 @@ public class internMove : MonoBehaviour {
 				newGoal();
 				agent.speed = 0.0f;
 				agent.angularSpeed = 0;
+				//agent.acceleration = 0;
 			}
-		if(interacting.counter == 0){
+		if(interacting.counter > 250){
 			action = false;
 			newGoal();
 		}
-		Debug.Log(action);
+		//Debug.Log(action);
 	}
 
 	void newGoal () {
@@ -50,6 +50,7 @@ public class internMove : MonoBehaviour {
 		}
 		if(action == true){
 			goal = new Vector3 (gameObject.transform.position.x,gameObject.transform.position.y,gameObject.transform.position.z);
+			Debug.Log(goal);
 		}
 	}
 }

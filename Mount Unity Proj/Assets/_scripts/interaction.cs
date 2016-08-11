@@ -18,12 +18,13 @@ public class interaction : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//Debug.Log(acting.action);
 		if(acting.action == true){
 			counter += 1;
-		}
 		if(counter > 250){
-			acting.action = false;
 			counter = 0;
+			acting.action = false;
+			}
 		}
 	}
 
@@ -31,7 +32,8 @@ public class interaction : MonoBehaviour {
 		//Debug.Log(col.tag);
 		if(col.tag == "chair"){
 			roll = Random.value * 100;
-			if(roll > 75f){
+			Debug.Log(roll);
+			if(roll > 50.0f){
 			acting.action = true;
 			}
 			}
