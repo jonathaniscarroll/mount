@@ -8,9 +8,6 @@ public class objectquality : MonoBehaviour {
 	public GameObject currentItem;
 	private float roll;
 
-	//public enum poorItems {};
-	//public enum goodItems {};
-
 	//minimum likes required for goodItem
 	public int likeQuantity = 15;
 
