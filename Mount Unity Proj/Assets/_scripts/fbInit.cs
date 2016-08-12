@@ -1,67 +1,39 @@
-﻿namespace Facebook.Unity.Example
-{
+﻿using Facebook.Unity;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
-	using System.Collections.Generic;
-	using System.Linq;
-	using UnityEngine;
+public class fbInit : MonoBehaviour {
 
-	public class fbInit : MonoBehaviour {
+	List<string> perm;
 
-		// Awake function from Unity's MonoBehavior
-		void Awake ()
-		{
-			if (!FB.IsInitialized) {
-				// Initialize the Facebook SDK
-				FB.Init(InitCallback, OnHideUnity);
-			} else {
-				// Already initialized, signal an app activation App Event
-				FB.ActivateApp();
-			}
-		}
+	// Awake function from Unity's MonoBehavior
+	void Awake ()
+	{
+		perm = new List<string> () { "public_profile", "email", "user_friends", "user_posts" };
 
-		private void InitCallback ()
-		{
-			if (FB.IsInitialized) {
-				// Signal an app activation App Event
-				FB.ActivateApp();
-				// Continue with Facebook SDK
-				FB.LogInWithReadPermissions (
-					new List<string>(){"public_profile", "email", "user_friends","posts"},
-					AuthCallback
-				);
-			} else {
-				Debug.Log("Failed to Initialize the Facebook SDK");
-			}
-		}
-
-		private void OnHideUnity (bool isGameShown)
-		{
-			if (!isGameShown) {
-				// Pause the game - we will need to hide
-				Time.timeScale = 0;
-			} else {
-				// Resume the game - we're getting focus again
-				Time.timeScale = 1;
-			}
-		}
-
-		private void AuthCallback (ILoginResult result) {
-			if (FB.IsLoggedIn) {
-				// AccessToken class will have session details
-				var aToken = Facebook.Unity.AccessToken.CurrentAccessToken;
-				// Print current access token's User ID
-				Debug.Log(aToken.UserId);
-				// Print current access token's granted permissions
-				foreach (string perm in aToken.Permissions) {
-					Debug.Log(perm);
-				}
-			} else {
-				Debug.Log("User cancelled login");
-			}
+		if (!FB.IsInitialized) {
+			// Initialize the Facebook SDK
+			FB.Init(internLogin);
 		}
 
 	}
-		
+
+	void internLogin(){
+		FB.LogInWithReadPermissions(perm, AuthCallback);
+	}
+
+	private void AuthCallback (ILoginResult result) {
+		if (FB.IsLoggedIn) {
+			// Print current access token's granted permissions
+			foreach (string str in perm) {
+				Debug.Log(str);
+			}
+		} else {
+			Debug.Log("User cancelled login");
+		}
+
+	}
 
 }
 
