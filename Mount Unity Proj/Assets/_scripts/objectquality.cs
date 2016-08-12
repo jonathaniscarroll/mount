@@ -16,8 +16,8 @@ public class objectquality : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		roll = 0;
 		//really drive home that this script is refering to the thing you told it to refer to
-
 		quality = gameObject.GetComponent<game_engine>();
 	}
 	
@@ -25,7 +25,6 @@ public class objectquality : MonoBehaviour {
 	void Update () {
 		if ( Input.GetKeyDown (KeyCode.Space) ){
 			roll = Random.value * 100;
-			//script name dot variable within said script fucking A
 		};
 
 		//determine if object generated will be high or low quality
