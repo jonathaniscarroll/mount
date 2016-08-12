@@ -8,6 +8,9 @@ public class objectquality : MonoBehaviour {
 	public GameObject currentItem;
 	private float roll;
 
+	public enum poorItems {};
+	public enum goodItems {};
+
 	//minimum likes required for goodItem
 	public int likeQuantity = 15;
 
@@ -29,11 +32,13 @@ public class objectquality : MonoBehaviour {
 
 		//determine if object generated will be high or low quality
 		if (quality.likes >= likeQuantity) {
+			if(roll < quality.likes){
 			currentItem = goodItem;
 		} else {
 			currentItem = poorItem;
+			}
 		};
-		
+	
 	}
 
 

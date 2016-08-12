@@ -30,12 +30,13 @@ public class interaction : MonoBehaviour {
 
 	void OnTriggerEnter (Collider col) {
 		//Debug.Log(col.tag);
+
 		if(col.tag == "chair"){
 			roll = Random.value * 100;
-			Debug.Log(roll);
+			//Debug.Log(roll);
 			if(roll > 50.0f){
 			acting.action = true;
 			}
-			}
 		}
 	}
+}

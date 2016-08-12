@@ -50,7 +50,6 @@ public class internMove : MonoBehaviour {
 		}
 		if(action == true){
 			goal = new Vector3 (gameObject.transform.position.x,gameObject.transform.position.y,gameObject.transform.position.z);
-			Debug.Log(goal);
 		}
 	}
 }
