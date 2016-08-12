@@ -1,10 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_scripts/text.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_scripts/objectQuantity.cs">
     <Files>
-      <File FileName="Assets/_scripts/internMove.cs" Line="7" Column="15" />
-      <File FileName="Assets/_scripts/game_engine.cs" Line="22" Column="21" />
-      <File FileName="Assets/_scripts/text.cs" Line="5" Column="1" />
+      <File FileName="Assets/_scripts/internMove.cs" Line="23" Column="82" />
+      <File FileName="Assets/_scripts/game_engine.cs" Line="27" Column="8" />
+      <File FileName="Assets/_scripts/objectQuantity.cs" Line="29" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
