@@ -1,15 +1,19 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿namespace Facebook.Unity.Example
+{
 
-public class fbInit : MonoBehaviour {
+	using UnityEngine;
+	using System.Collections;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	public class fbInit : MonoBehaviour {
+
+		// Use this for initialization
+		void Start () {
+			FB.Init();
+		}
+		
+		// Update is called once per frame
+		void Update () {
+		
+		}
 	}
 }
