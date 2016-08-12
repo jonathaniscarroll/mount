@@ -8,11 +8,15 @@ public class itemLvDetect : MonoBehaviour {
 
 	public itemLvVars itemLevelRead;
 
-	public int topChairLevel;
+
 	public Rigidbody rigid;
 	private float randomX;
 	private float randomY;
 	private float randomZ;
+
+
+	//all the types of items and their top levels stored
+	public int topChairLevel;
 
 	// Use this for initialization
 	void Start () {
