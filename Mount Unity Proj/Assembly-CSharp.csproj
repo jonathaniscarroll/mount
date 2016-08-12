@@ -48,6 +48,8 @@
      <Compile Include="Assets\_scripts\game_engine.cs" />
      <Compile Include="Assets\_scripts\interaction.cs" />
      <Compile Include="Assets\_scripts\internMove.cs" />
+     <Compile Include="Assets\_scripts\itemLvDetect.cs" />
+     <Compile Include="Assets\_scripts\itemLvVars.cs" />
      <Compile Include="Assets\_scripts\objectQuantity.cs" />
      <Compile Include="Assets\_scripts\objectquality.cs" />
      <Compile Include="Assets\_scripts\rotate_pillar.cs" />
