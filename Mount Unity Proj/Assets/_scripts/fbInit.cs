@@ -1,19 +1,67 @@
 ﻿namespace Facebook.Unity.Example
 {
 
+	using System.Collections.Generic;
+	using System.Linq;
 	using UnityEngine;
-	using System.Collections;
 
 	public class fbInit : MonoBehaviour {
 
-		// Use this for initialization
-		void Start () {
-			FB.Init();
+		// Awake function from Unity's MonoBehavior
+		void Awake ()
+		{
+			if (!FB.IsInitialized) {
+				// Initialize the Facebook SDK
+				FB.Init(InitCallback, OnHideUnity);
+			} else {
+				// Already initialized, signal an app activation App Event
+				FB.ActivateApp();
+			}
 		}
-		
-		// Update is called once per frame
-		void Update () {
-		
+
+		private void InitCallback ()
+		{
+			if (FB.IsInitialized) {
+				// Signal an app activation App Event
+				FB.ActivateApp();
+				// Continue with Facebook SDK
+				FB.LogInWithReadPermissions (
+					new List<string>(){"public_profile", "email", "user_friends","posts"},
+					AuthCallback
+				);
+			} else {
+				Debug.Log("Failed to Initialize the Facebook SDK");
+			}
 		}
+
+		private void OnHideUnity (bool isGameShown)
+		{
+			if (!isGameShown) {
+				// Pause the game - we will need to hide
+				Time.timeScale = 0;
+			} else {
+				// Resume the game - we're getting focus again
+				Time.timeScale = 1;
+			}
+		}
+
+		private void AuthCallback (ILoginResult result) {
+			if (FB.IsLoggedIn) {
+				// AccessToken class will have session details
+				var aToken = Facebook.Unity.AccessToken.CurrentAccessToken;
+				// Print current access token's User ID
+				Debug.Log(aToken.UserId);
+				// Print current access token's granted permissions
+				foreach (string perm in aToken.Permissions) {
+					Debug.Log(perm);
+				}
+			} else {
+				Debug.Log("User cancelled login");
+			}
+		}
+
 	}
+		
+
 }
+
