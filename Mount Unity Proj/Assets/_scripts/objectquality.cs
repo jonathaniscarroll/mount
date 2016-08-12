@@ -16,7 +16,7 @@ public class objectquality : MonoBehaviour {
 
 	//reference the name of the script and the variable it is assigned
 	public game_engine quality; 
-
+	//asdf
 	// Use this for initialization
 	void Start () {
 		roll = 0;
