@@ -65,6 +65,7 @@
      <Compile Include="Assets\_scripts\objectquality.cs" />
      <Compile Include="Assets\_scripts\rotate_pillar.cs" />
      <Compile Include="Assets\_scripts\text.cs" />
+     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
