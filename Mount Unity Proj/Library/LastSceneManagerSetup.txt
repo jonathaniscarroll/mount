@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/FacebookSDK/Examples/MainMenu.unity
+- path: Assets/Scenes/InternCubicle1.unity
   isLoaded: 1
   isActive: 1
