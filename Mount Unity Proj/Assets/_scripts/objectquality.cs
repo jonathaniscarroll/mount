@@ -13,7 +13,7 @@ public class objectquality : MonoBehaviour {
 
 	//reference the name of the script and the variable it is assigned
 	public game_engine quality; 
-	//asdf
+
 	// Use this for initialization
 	void Start () {
 		roll = 0;
@@ -28,11 +28,13 @@ public class objectquality : MonoBehaviour {
 			roll = Random.value * 100;
 		};
 
+		roll = Random.value * 100;
+
 		//determine if object generated will be high or low quality
-		if (quality.likes >= likeQuantity) {
-			if(roll < quality.likes){
+		if (quality.posts >= likeQuantity) {
+			if(roll < quality.posts){
 			currentItem = goodItem;
-			} else if(roll > quality.likes){
+			} else if(roll > quality.posts){
 			currentItem = poorItem;
 			}
 		}

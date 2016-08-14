@@ -32,7 +32,7 @@ public class objectQuantity : MonoBehaviour {
 	void generateObject(){
 		cubicleObject = quality.currentItem;
 		objectProb = Random.Range (0f, 100f);
-		if (objectProb <= quantity.posts) {
+		if (objectProb <= quantity.likes) {
 			Instantiate(cubicleObject, new Vector3(Random.Range (-5f, 5f), 10, Random.Range (-5f, 5f)), Quaternion.identity);
 		}
 	}

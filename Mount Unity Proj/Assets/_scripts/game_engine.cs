@@ -32,14 +32,14 @@ public class game_engine : MonoBehaviour {
 		timer += 1;
 		if (timer > 500){
 			//Debug.Log(true);
-			if(likes > 0){
-				likes -= 1;
-				//Debug.Log("Likes");
-			}
-			if(posts > 0){
-				posts -= 1;
+//			if(likes > 0){
+//				likes -= 1;
+//				//Debug.Log("Likes");
+//			}
+//			if(posts > 0){
+//				posts -= 1;
 				//Debug.Log("Posts");
-			}
+//			}
 			timer = 0;
 			setText();
 		}
@@ -51,7 +51,7 @@ public class game_engine : MonoBehaviour {
 		}
 	}
 
-	void setText(){
+	public void setText(){
 		likeText.text = "likes = " + likes.ToString();
 		postText.text = "posts = " + posts.ToString();
 	}
