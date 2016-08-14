@@ -9,7 +9,9 @@ public class fbInit : MonoBehaviour {
 
 	List<string> perm;
 	private Dictionary<string,object> FBUserDetails;
+	private Dictionary<string,object> PostDetails;
 	private string fbID;
+	int likeCount;
 
 	// Awake function from Unity's MonoBehavior
 	void Awake ()
@@ -50,7 +52,7 @@ public class fbInit : MonoBehaviour {
 
 	private void postsCallback(IGraphResult result){
 
-		Debug.Log (result.RawResult);
+		//Debug.Log (result.RawResult);
 
 		FBUserDetails = (Dictionary<string,object>)result.ResultDictionary;
 
@@ -67,7 +69,26 @@ public class fbInit : MonoBehaviour {
 	}
 
 	private void returnPostLikes(IGraphResult result){
-		Debug.Log ("Likes: " + result.RawResult);
+		//Debug.Log ("Likes: " + result.RawResult);
+
+		Dictionary<string,object> likes;
+		object likesID;
+		int i = 0;
+
+		PostDetails = (Dictionary<string,object>)result.ResultDictionary;
+		var postParts = new List<object> ();
+		postParts = (List<object>)(PostDetails["data"]);
+
+		foreach(object keyValue in postParts)
+		{
+			likes = keyValue as Dictionary<string,object>;
+			likesID = likes ["id"];
+			i = i + 1;
+			likeCount++;
+			Debug.Log ("LIKE ID: "  + likesID + ", TOTAL LIKE COUNT:" + likeCount + ", THIS POST LIKE COUNT: " + i);
+
+		}
+
 	}
 
 }
