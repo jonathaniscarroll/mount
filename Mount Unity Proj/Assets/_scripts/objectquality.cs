@@ -29,10 +29,10 @@ public class objectquality : MonoBehaviour {
 		};
 
 		//determine if object generated will be high or low quality
-		if (quality.likes >= likeQuantity) {
-			if(roll < quality.likes){
+		if (quality.posts >= likeQuantity) {
+			if(roll < quality.posts){
 			currentItem = goodItem;
-			} else if(roll > quality.likes){
+			} else if(roll > quality.posts){
 			currentItem = poorItem;
 			}
 		}
