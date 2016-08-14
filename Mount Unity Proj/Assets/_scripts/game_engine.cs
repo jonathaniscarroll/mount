@@ -51,7 +51,7 @@ public class game_engine : MonoBehaviour {
 		}
 	}
 
-	void setText(){
+	public void setText(){
 		likeText.text = "likes = " + likes.ToString();
 		postText.text = "posts = " + posts.ToString();
 	}

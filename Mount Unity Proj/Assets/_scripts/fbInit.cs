@@ -11,11 +11,17 @@ public class fbInit : MonoBehaviour {
 	private Dictionary<string,object> FBUserDetails;
 	private Dictionary<string,object> PostDetails;
 	private string fbID;
-	int likeCount;
+
+	private int likeCount;
+	private int postCount;
+
+	public game_engine GameEngine;
 
 	// Awake function from Unity's MonoBehavior
 	void Awake ()
 	{
+		GameEngine = gameObject.GetComponent<game_engine>();
+
 		perm = new List<string> () { "public_profile", "email", "user_friends", "user_posts" };
 
 		if (!FB.IsInitialized) {
@@ -63,9 +69,13 @@ public class fbInit : MonoBehaviour {
 		{
 			var post = keyValue as Dictionary<string,object>;
 			var postID = post ["id"];
-			Debug.Log ("ID: "  + postID);
+			postCount++;
+			//Debug.Log ("ID: "  + postID);
 			FB.API ("/" + postID + "/likes", HttpMethod.GET,returnPostLikes,new Dictionary<string,string>(){}); 
 		}
+
+		GameEngine.posts = postCount;
+		GameEngine.setText ();
 	}
 
 	private void returnPostLikes(IGraphResult result){
@@ -88,7 +98,8 @@ public class fbInit : MonoBehaviour {
 			Debug.Log ("LIKE ID: "  + likesID + ", TOTAL LIKE COUNT:" + likeCount + ", THIS POST LIKE COUNT: " + i);
 
 		}
-
+		GameEngine.likes = likeCount;
+		GameEngine.setText ();
 	}
 
 }
