@@ -1,4 +1,6 @@
 ﻿using Facebook.Unity;
+using Facebook.MiniJSON;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -47,19 +49,25 @@ public class fbInit : MonoBehaviour {
 	}
 
 	private void postsCallback(IGraphResult result){
+
 		Debug.Log (result.RawResult);
 
 		FBUserDetails = (Dictionary<string,object>)result.ResultDictionary;
 
-		//Debug.Log ("POSTS ITS POSSST: " + FBUserDetails["posts"]);
+		var postList = new List<object> ();
+		postList = (List<object>)(FBUserDetails["data"]);
 
-		foreach(KeyValuePair<string,object> keyValue in FBUserDetails)
+		foreach(object keyValue in postList)
 		{
-			string key = keyValue.Key;
-			object value = keyValue.Value;
-
-			Debug.Log ("KEY: " + key + " VALUE: " + value);
+			var post = keyValue as Dictionary<string,object>;
+			var postID = post ["id"];
+			Debug.Log ("ID: "  + postID);
+			FB.API ("/" + postID + "/likes", HttpMethod.GET,returnPostLikes,new Dictionary<string,string>(){}); 
 		}
+	}
+
+	private void returnPostLikes(IGraphResult result){
+		Debug.Log ("Likes: " + result.RawResult);
 	}
 
 }
