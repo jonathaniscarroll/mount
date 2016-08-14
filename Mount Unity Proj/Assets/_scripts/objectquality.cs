@@ -28,6 +28,8 @@ public class objectquality : MonoBehaviour {
 			roll = Random.value * 100;
 		};
 
+		roll = Random.value * 100;
+
 		//determine if object generated will be high or low quality
 		if (quality.posts >= likeQuantity) {
 			if(roll < quality.posts){

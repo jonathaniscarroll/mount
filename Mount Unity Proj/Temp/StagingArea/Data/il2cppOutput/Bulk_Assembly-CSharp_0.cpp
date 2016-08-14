@@ -4885,65 +4885,39 @@ IL_0040:
 		int32_t L_5 = __this->get_timer_4();
 		if ((((int32_t)L_5) <= ((int32_t)((int32_t)500))))
 		{
-			goto IL_009f;
+			goto IL_006b;
 		}
 	}
-	{
-		int32_t L_6 = __this->get_likes_2();
-		if ((((int32_t)L_6) <= ((int32_t)0)))
-		{
-			goto IL_0078;
-		}
-	}
-	{
-		int32_t L_7 = __this->get_likes_2();
-		__this->set_likes_2(((int32_t)((int32_t)L_7-(int32_t)1)));
-	}
-
-IL_0078:
-	{
-		int32_t L_8 = __this->get_posts_3();
-		if ((((int32_t)L_8) <= ((int32_t)0)))
-		{
-			goto IL_0092;
-		}
-	}
-	{
-		int32_t L_9 = __this->get_posts_3();
-		__this->set_posts_3(((int32_t)((int32_t)L_9-(int32_t)1)));
-	}
-
-IL_0092:
 	{
 		__this->set_timer_4(0);
 		game_engine_setText_m2049263881(__this, /*hidden argument*/NULL);
 	}
 
-IL_009f:
+IL_006b:
 	{
-		int32_t L_10 = __this->get_likes_2();
-		if ((((int32_t)L_10) >= ((int32_t)0)))
+		int32_t L_6 = __this->get_likes_2();
+		if ((((int32_t)L_6) >= ((int32_t)0)))
 		{
-			goto IL_00b2;
+			goto IL_007e;
 		}
 	}
 	{
 		__this->set_likes_2(0);
 	}
 
-IL_00b2:
+IL_007e:
 	{
-		int32_t L_11 = __this->get_posts_3();
-		if ((((int32_t)L_11) >= ((int32_t)0)))
+		int32_t L_7 = __this->get_posts_3();
+		if ((((int32_t)L_7) >= ((int32_t)0)))
 		{
-			goto IL_00c5;
+			goto IL_0091;
 		}
 	}
 	{
 		__this->set_posts_3(0);
 	}
 
-IL_00c5:
+IL_0091:
 	{
 		return;
 	}
@@ -5433,45 +5407,47 @@ extern "C"  void objectquality_Update_m4027502562 (objectquality_t4090284256 * _
 
 IL_001d:
 	{
-		game_engine_t3906582319 * L_2 = __this->get_quality_7();
-		int32_t L_3 = L_2->get_posts_3();
-		int32_t L_4 = __this->get_likeQuantity_6();
-		if ((((int32_t)L_3) < ((int32_t)L_4)))
+		float L_2 = Random_get_value_m2402066692(NULL /*static, unused*/, /*hidden argument*/NULL);
+		__this->set_roll_5(((float)((float)L_2*(float)(100.0f))));
+		game_engine_t3906582319 * L_3 = __this->get_quality_7();
+		int32_t L_4 = L_3->get_posts_3();
+		int32_t L_5 = __this->get_likeQuantity_6();
+		if ((((int32_t)L_4) < ((int32_t)L_5)))
 		{
-			goto IL_007e;
+			goto IL_008f;
 		}
 	}
 	{
-		float L_5 = __this->get_roll_5();
-		game_engine_t3906582319 * L_6 = __this->get_quality_7();
-		int32_t L_7 = L_6->get_posts_3();
-		if ((!(((float)L_5) < ((float)(((float)((float)L_7)))))))
+		float L_6 = __this->get_roll_5();
+		game_engine_t3906582319 * L_7 = __this->get_quality_7();
+		int32_t L_8 = L_7->get_posts_3();
+		if ((!(((float)L_6) < ((float)(((float)((float)L_8)))))))
 		{
-			goto IL_005b;
+			goto IL_006c;
 		}
 	}
 	{
-		GameObject_t3674682005 * L_8 = __this->get_goodItem_3();
-		__this->set_currentItem_4(L_8);
-		goto IL_007e;
+		GameObject_t3674682005 * L_9 = __this->get_goodItem_3();
+		__this->set_currentItem_4(L_9);
+		goto IL_008f;
 	}
 
-IL_005b:
+IL_006c:
 	{
-		float L_9 = __this->get_roll_5();
-		game_engine_t3906582319 * L_10 = __this->get_quality_7();
-		int32_t L_11 = L_10->get_posts_3();
-		if ((!(((float)L_9) > ((float)(((float)((float)L_11)))))))
+		float L_10 = __this->get_roll_5();
+		game_engine_t3906582319 * L_11 = __this->get_quality_7();
+		int32_t L_12 = L_11->get_posts_3();
+		if ((!(((float)L_10) > ((float)(((float)((float)L_12)))))))
 		{
-			goto IL_007e;
+			goto IL_008f;
 		}
 	}
 	{
-		GameObject_t3674682005 * L_12 = __this->get_poorItem_2();
-		__this->set_currentItem_4(L_12);
+		GameObject_t3674682005 * L_13 = __this->get_poorItem_2();
+		__this->set_currentItem_4(L_13);
 	}
 
-IL_007e:
+IL_008f:
 	{
 		return;
 	}
