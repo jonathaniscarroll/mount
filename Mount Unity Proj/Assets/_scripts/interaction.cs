@@ -47,6 +47,6 @@ public class interaction : MonoBehaviour {
 
 	void PickUpandHold (GameObject item) {
 		item.transform.SetParent(intern.transform, true);
-		item.rigidbody.Gravity = false;
+		item.GetComponent<Rigidbody>().Gravity = false;
 	}
 }
