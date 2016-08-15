@@ -38,5 +38,15 @@ public class interaction : MonoBehaviour {
 			acting.action = true;
 			}
 		}
+		if(col.tag == "pencil"){
+			//get collider's game object, put that into pickuphold
+			PickUpandHold (col.gameObject);
+			Debug.Log(col.gameObject);
+		}
+	}
+
+	void PickUpandHold (GameObject item) {
+		item.transform.SetParent(intern.transform, true);
+		item.rigidbody.Gravity = false;
 	}
 }
