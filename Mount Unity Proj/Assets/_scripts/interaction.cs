@@ -41,12 +41,29 @@ public class interaction : MonoBehaviour {
 		if(col.tag == "pencil"){
 			//get collider's game object, put that into pickuphold
 			PickUpandHold (col.gameObject);
-			Debug.Log(col.gameObject);
+			//Debug.Log(col.gameObject);
 		}
 	}
 
 	void PickUpandHold (GameObject item) {
+		Vector3 internPosiHold = new Vector3 (intern.transform.position.x + 1, 2.0f, intern.transform.position.z+ 1);
+
+		//item.transform.Translate(internPosiHold * (Time.deltaTime * 0.1f), Space.Self);
+//		private float journey
+//		journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
+//		float distCovered = (Time.time - startTime) * speed;
+//		float fracJourney = distCovered / journeyLength;
+
+//		item.transform.position = Vector3.MoveTowards(item.transform.position, internPosiHold, Time.deltaTime * 0.1f);
 		item.transform.SetParent(intern.transform, true);
+<<<<<<< HEAD
+		item.transform.position = Vector3.Lerp(item.transform.position, internPosiHold, );
+		item.GetComponent<Rigidbody>().useGravity = false;
+
+		item.GetComponent<Rigidbody>().isKinematic = true;
+
+=======
 		item.GetComponent<Rigidbody>().Gravity = false;
+>>>>>>> 1929c2d8d413225fe8f6d97afafe798cbe1c866f
 	}
 }
