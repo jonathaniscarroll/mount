@@ -56,14 +56,14 @@ public class interaction : MonoBehaviour {
 
 //		item.transform.position = Vector3.MoveTowards(item.transform.position, internPosiHold, Time.deltaTime * 0.1f);
 		item.transform.SetParent(intern.transform, true);
-<<<<<<< HEAD
-		item.transform.position = Vector3.Lerp(item.transform.position, internPosiHold, );
-		item.GetComponent<Rigidbody>().useGravity = false;
-
-		item.GetComponent<Rigidbody>().isKinematic = true;
-
-=======
-		item.GetComponent<Rigidbody>().Gravity = false;
->>>>>>> 1929c2d8d413225fe8f6d97afafe798cbe1c866f
+//<<<<<<< HEAD
+//		item.transform.position = Vector3.Lerp(item.transform.position, internPosiHold, );
+//		item.GetComponent<Rigidbody>().useGravity = false;
+//
+//		item.GetComponent<Rigidbody>().isKinematic = true;
+//
+//=======
+//		item.GetComponent<Rigidbody>().Gravity = false;
+//>>>>>>> 1929c2d8d413225fe8f6d97afafe798cbe1c866f
 	}
 }
