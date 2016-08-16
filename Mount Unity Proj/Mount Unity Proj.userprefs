@@ -7,7 +7,8 @@
       <File FileName="Assets/_scripts/objectquality.cs" Line="1" Column="1" />
       <File FileName="Assets/_scripts/objectQuantity.cs" Line="1" Column="1" />
       <File FileName="Assets/Standard Assets/Effects/ToonShading/Shaders/ToonBasicOutline.shader" Line="1" Column="1" />
-      <File FileName="Assets/_scripts/interaction.cs" Line="32" Column="9" />
+      <File FileName="Assets/_scripts/interaction.cs" Line="80" Column="2" />
+      <File FileName="Assets/_scripts/objectDictionary.cs" Line="30" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

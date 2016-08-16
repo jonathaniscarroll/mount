@@ -12,6 +12,13 @@ public class interaction : MonoBehaviour {
 
 	private int holding;
 
+	//throwing stuff stuff
+	public Rigidbody rigidthrow;
+	private float randomX;
+	private float randomY;
+	private float randomZ;
+
+
 	// Use this for initialization
 	void Start () {
 		acting = intern.GetComponent<internMove>();
@@ -48,6 +55,7 @@ public class interaction : MonoBehaviour {
 			}
 			if(holding == 1){
 				ThrowAwayItem ("pencil");
+				PickUpandHold (col.gameObject);
 			}
 			//Debug.Log(col.gameObject);
 
@@ -74,6 +82,17 @@ public class interaction : MonoBehaviour {
 		foreach (Transform iChild in intern.transform){
 			if (iChild.tag == oldItemName){
 				Debug.Log(iChild.tag + " OLD");
+
+				randomX = (Random.value * 360f)*5;
+				randomY = (Random.value * 360f)*5;
+				randomZ = (Random.value * 360f)*5;
+				iChild.GetComponent<Rigidbody>().useGravity = true;
+
+				iChild.GetComponent<Rigidbody>().isKinematic = false;
+
+				rigidthrow = iChild.GetComponent<Rigidbody>();
+				rigidthrow.AddForce(randomX, randomY, randomZ, ForceMode.Force);
+				iChild.parent = null;
 			}
 		}
 	}
