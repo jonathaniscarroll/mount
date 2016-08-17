@@ -10,7 +10,10 @@ public class game_engine : MonoBehaviour {
 	public Text likeText;
 	public Text postText;
 
+	public cubicleGeneration CubicleGeneration;
+
 	void Start () {
+		CubicleGeneration = gameObject.GetComponent<cubicleGeneration> ();
 		timer = 0;
 		likes = 0;
 		posts = 0;
@@ -40,8 +43,13 @@ public class game_engine : MonoBehaviour {
 //				posts -= 1;
 				//Debug.Log("Posts");
 //			}
+			if (likes > 50) {
+				CubicleGeneration.newCubicle ();
+			}
+
 			timer = 0;
 			setText();
+
 		}
 		if(likes < 0){
 			likes = 0;
