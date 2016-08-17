@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class interaction : MonoBehaviour {
@@ -26,6 +27,8 @@ public class interaction : MonoBehaviour {
 	public LineRenderer render;
 	public int drawLength = 19; 
 
+	//laptop text stuff;
+	public Text laptoptext;
 
 	// Use this for initialization
 	void Start () {
@@ -35,16 +38,21 @@ public class interaction : MonoBehaviour {
 		holding = 0;
 		render.SetVertexCount(drawLength);
 		render.enabled = false;
+
+		laptoptext.text = null;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		//Debug.Log(acting.action);
 		if(acting.action == true){
-			counter += 1;
-		if(counter > 250){
-			counter = 0;
-			acting.action = false;
+			counter += 1; 
+			if(counter > 250){
+				laptoptext.text = null;
+
+				acting.action = false;
+				counter = 0;
 			}
 		}
 		if(holding == 1){
@@ -55,6 +63,7 @@ public class interaction : MonoBehaviour {
 				}
 			}
 		}
+			
 	}
 
 	void OnTriggerEnter (Collider col) {
@@ -79,6 +88,19 @@ public class interaction : MonoBehaviour {
 			}
 			//Debug.Log(col.gameObject);
 
+		} 
+
+
+		if(col.tag == "laptop"){
+			counter = 0;
+			roll = Random.value * 100;
+			if(roll > 0.0f){
+				acting.action = true;
+				laptoptext.text = "laptop works";
+				if(counter > 200){
+					laptoptext.text = null;
+				}
+			}
 		}
 	}
 
@@ -101,7 +123,6 @@ public class interaction : MonoBehaviour {
 	void ThrowAwayItem (string oldItemName){
 		foreach (Transform iChild in intern.transform){
 			if (iChild.tag == oldItemName){
-				Debug.Log(iChild.tag + " OLD");
 
 				randomX = (Random.value * 100f)*50;
 				//randomY = (Random.value * 360f)*5;
@@ -126,7 +147,7 @@ public class interaction : MonoBehaviour {
 		if (i > 5){
 			i = 0;
 			j++;
-			if(j > drawLength){
+			if(j > drawLength - 1){
 			j = 0;
 			}
 		}
