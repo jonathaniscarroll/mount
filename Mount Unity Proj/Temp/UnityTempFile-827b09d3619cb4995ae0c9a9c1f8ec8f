@@ -75,7 +75,6 @@
 -define:UNITY_EDITOR
 -define:UNITY_EDITOR_64
 -define:UNITY_EDITOR_OSX
--define:UNITY_TEAM_LICENSE
 'Assets/FacebookSDK/Examples/Scripts/ConsoleBase.cs'
 'Assets/FacebookSDK/Examples/Scripts/LogView.cs'
 'Assets/FacebookSDK/Examples/Scripts/MenuBase.cs'
@@ -89,6 +88,7 @@
 'Assets/FacebookSDK/Examples/Scripts/SubMenus/GraphRequest.cs'
 'Assets/FacebookSDK/Examples/Scripts/SubMenus/MainMenu.cs'
 'Assets/FacebookSDK/Examples/Scripts/SubMenus/Pay.cs'
+'Assets/_scripts/cubicleGeneration.cs'
 'Assets/_scripts/fbInit.cs'
 'Assets/_scripts/game_engine.cs'
 'Assets/_scripts/interaction.cs'

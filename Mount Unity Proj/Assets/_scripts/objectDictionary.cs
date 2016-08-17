@@ -25,9 +25,9 @@ public class objectDictionary : MonoBehaviour {
 		foreach(GameObject cubobj in cubicleObjects)
 		{
 			o = Random.Range (i * (10 + i * i) - 10, i * (10 + i * i) + 10);
-			Debug.Log (o);
+			//Debug.Log (o);
 			cubobjDictionary.Add (o,cubobj);
-			Debug.Log (cubobjDictionary[o]);
+			//Debug.Log (cubobjDictionary[o]);
 			i++;
 		}
 	}
