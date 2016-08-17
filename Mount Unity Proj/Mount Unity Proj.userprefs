@@ -4,10 +4,17 @@
     <Files>
       <File FileName="Assets/_scripts/game_engine.cs" Line="58" Column="2" />
       <File FileName="Assets/_scripts/objectquality.cs" Line="1" Column="1" />
+<<<<<<< HEAD
       <File FileName="Assets/_scripts/objectQuantity.cs" Line="22" Column="53" />
       <File FileName="Assets/_scripts/objectDictionary.cs" Line="27" Column="68" />
       <File FileName="Assets/_scripts/fbInit.cs" Line="3" Column="1" />
       <File FileName="Assets/_scripts/interaction.cs" Line="1" Column="1" />
+=======
+      <File FileName="Assets/_scripts/objectQuantity.cs" Line="1" Column="1" />
+      <File FileName="Assets/Standard Assets/Effects/ToonShading/Shaders/ToonBasicOutline.shader" Line="1" Column="1" />
+      <File FileName="Assets/_scripts/interaction.cs" Line="80" Column="2" />
+      <File FileName="Assets/_scripts/objectDictionary.cs" Line="30" Column="1" />
+>>>>>>> 6017557b75d23c89b39d504014e8cf6a1ab7a2c4
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

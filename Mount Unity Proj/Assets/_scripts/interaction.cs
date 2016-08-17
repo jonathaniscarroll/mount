@@ -10,10 +10,20 @@ public class interaction : MonoBehaviour {
 	public int counter;
 	private float roll;
 
+	private int holding;
+
+	//throwing stuff stuff
+	public Rigidbody rigidthrow;
+	private float randomX;
+	private float randomY;
+	private float randomZ;
+
+
 	// Use this for initialization
 	void Start () {
 		acting = intern.GetComponent<internMove>();
 		counter = 0;
+		holding = 0;
 	}
 	
 	// Update is called once per frame
@@ -40,22 +50,50 @@ public class interaction : MonoBehaviour {
 		}
 		if(col.tag == "pencil"){
 			//get collider's game object, put that into pickuphold
+			if(holding == 0){
 			PickUpandHold (col.gameObject);
+			}
+			if(holding == 1){
+				ThrowAwayItem ("pencil");
+				PickUpandHold (col.gameObject);
+			}
 			//Debug.Log(col.gameObject);
+
 		}
 	}
 
 	void PickUpandHold (GameObject item) {
-		Vector3 internPosiHold = new Vector3 (intern.transform.position.x + 0.5f, 2.0f, intern.transform.position.z + 0.5f);
+		Vector3 internPosiHold = new Vector3 (transform.position.x, 2.0f, transform.position.z);
 
 		//item.transform.Translate(internPosiHold * (Time.deltaTime * 0.1f), Space.Self);
 	
 		//item.transform.position = Vector3.MoveTowards(item.transform.position, internPosiHold, Time.deltaTime * 0.1f);
 		item.transform.position = internPosiHold;
+		item.transform.rotation = Random.rotation;
 		item.transform.SetParent(intern.transform, true);
 		item.GetComponent<Rigidbody>().useGravity = false;
 
 		item.GetComponent<Rigidbody>().isKinematic = true;
+		holding = 1;
 
+	}
+
+	void ThrowAwayItem (string oldItemName){
+		foreach (Transform iChild in intern.transform){
+			if (iChild.tag == oldItemName){
+				Debug.Log(iChild.tag + " OLD");
+
+				randomX = (Random.value * 360f)*5;
+				randomY = (Random.value * 360f)*5;
+				randomZ = (Random.value * 360f)*5;
+				iChild.GetComponent<Rigidbody>().useGravity = true;
+
+				iChild.GetComponent<Rigidbody>().isKinematic = false;
+
+				rigidthrow = iChild.GetComponent<Rigidbody>();
+				rigidthrow.AddForce(randomX, randomY, randomZ, ForceMode.Force);
+				iChild.parent = null;
+			}
+		}
 	}
 }
