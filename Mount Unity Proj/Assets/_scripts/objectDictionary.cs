@@ -7,14 +7,19 @@ public class objectDictionary : MonoBehaviour {
 	public List<GameObject> cubicleObjects = new List<GameObject>();
 
 	public Dictionary<int,GameObject> cubobjDictionary;
-	public Dictionary<int,GameObject> weightDictionary;
+	public Dictionary<GameObject,float> weightDictionary;
 
 	private GameObject[] testWeight;
 	private string objTag;
 
+	private float increment;
+	private float incrementPoints;
+
 	// Use this for initialization
 	void Start () {
+		incrementPoints = 100f;
 		cubobjDictionary = new Dictionary<int,GameObject>();
+		weightDictionary = new Dictionary<GameObject,float> ();
 		makeObjectDictionary ();
 	}
 	
@@ -42,20 +47,30 @@ public class objectDictionary : MonoBehaviour {
 	//weight object generation based on which objects already exist
 	void weightObjects(){
 
-		int i = 0;
+		float incrementCount;
+		float weight;
+
+
 
 		foreach (GameObject cubobj in cubicleObjects) {
+
+			increment = incrementPoints/cubicleObjects.Count;
 
 			objTag = cubobj.tag;
 			//find how many of each game object is in the scene
 			testWeight = GameObject.FindGameObjectsWithTag (objTag);
 
-			Debug.Log(cubobj + ": " + testWeight.Length);
+			weight = increment / testWeight.Length;
 
-//			foreach (GameObject objectWeight in testWeight) {
-//				weightDictionary.ADD ();
-//				i++;
-//			}
+			if (cubobj != null && testWeight.Length != null) {
+				//create dictionary containing the amount of each object contained in scene
+
+				weightDictionary.Add (cubobj, weight);
+				Debug.Log (cubobj + " " + weightDictionary[cubobj]);
+			}
+
+			incrementPoints = incrementPoints - weight;
+
 		}
 	}
 }

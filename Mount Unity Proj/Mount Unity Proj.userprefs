@@ -1,14 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_scripts/fbInit.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_scripts/objectDictionary.cs">
     <Files>
       <File FileName="Assets/_scripts/cubicleGeneration.cs" Line="1" Column="1" />
-      <File FileName="Assets/_scripts/game_engine.cs" Line="1" Column="1" />
-      <File FileName="Assets/_scripts/objectquality.cs" Line="1" Column="1" />
+      <File FileName="Assets/_scripts/game_engine.cs" Line="33" Column="4" />
       <File FileName="Assets/_scripts/objectQuantity.cs" Line="1" Column="1" />
-      <File FileName="Assets/_scripts/objectDictionary.cs" Line="1" Column="1" />
-      <File FileName="Assets/_scripts/fbInit.cs" Line="109" Column="1" />
-      <File FileName="Assets/_scripts/saveItems.cs" Line="1" Column="1" />
+      <File FileName="Assets/_scripts/objectDictionary.cs" Line="72" Column="47" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
