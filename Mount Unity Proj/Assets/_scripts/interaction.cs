@@ -8,16 +8,19 @@ public class interaction : MonoBehaviour {
 	public GameObject intern;
 	public internMove acting; 
 
-	public int counter;
+	public float counter;
 	private float roll;
 
-	private int holding;
+	private int holdingPencil;
+	private int holdingCoffee;
 
 	//throwing stuff stuff
 	public Rigidbody rigidthrow;
 	private float randomX;
 	private float randomY;
 	private float randomZ;
+
+	public Rigidbody rotater;
 
 	//linerender stuff
 
@@ -35,7 +38,8 @@ public class interaction : MonoBehaviour {
 		acting = intern.GetComponent<internMove>();
 		render = Drawing.GetComponent<LineRenderer>();
 		counter = 0;
-		holding = 0;
+		holdingPencil = 0;
+		holdingCoffee = 0;
 		render.SetVertexCount(drawLength);
 		render.enabled = false;
 
@@ -55,7 +59,7 @@ public class interaction : MonoBehaviour {
 				counter = 0;
 			}
 		}
-		if(holding == 1){
+		if(holdingPencil == 1){
 			foreach (Transform iChild in intern.transform){
 				if (iChild.tag == "pencil") {
 					//render.SetPosition(intern.transform.position.x,intern.transform.position.y,intern.transform.position.z);
@@ -78,11 +82,11 @@ public class interaction : MonoBehaviour {
 		}
 		if(col.tag == "pencil"){
 			//get collider's game object, put that into pickuphold
-			if(holding == 0){
+			if(holdingPencil == 0){
 			PickUpandHold (col.gameObject);
-				render.enabled = true;
+				//render.enabled = true;
 			}
-			if(holding == 1){
+			if(holdingPencil == 1){
 				ThrowAwayItem ("pencil");
 				PickUpandHold (col.gameObject);
 			}
@@ -90,6 +94,19 @@ public class interaction : MonoBehaviour {
 
 		} 
 
+		if(col.tag == "coffee"){
+			//get collider's game object, put that into pickuphold
+			if(holdingCoffee == 0){
+				PickUpandHold (col.gameObject);
+				render.enabled = true;
+			}
+			if(holdingCoffee == 1){
+				ThrowAwayItem ("coffee");
+				PickUpandHold (col.gameObject);
+			}
+			//Debug.Log(col.gameObject);
+
+		}
 
 		if(col.tag == "laptop"){
 			counter = 0;
@@ -101,6 +118,15 @@ public class interaction : MonoBehaviour {
 					laptoptext.text = null;
 				}
 			}
+		}
+
+		if(col.tag == "pyramid"){
+			counter = 0;
+			rotater = col.GetComponent<Rigidbody>();
+			//rotater.mass = 0;;
+			//col.transform.position = new Vector3(col.transform.position.x, (counter * 0.01f), col.transform.position.z);
+			rotater.AddForce(0,500,0, ForceMode.Acceleration);
+			rotater.AddTorque(0, 1000, 0, ForceMode.Acceleration);
 		}
 	}
 
@@ -116,7 +142,13 @@ public class interaction : MonoBehaviour {
 		item.GetComponent<Rigidbody>().useGravity = false;
 
 		item.GetComponent<Rigidbody>().isKinematic = true;
-		holding = 1;
+
+		if(item.tag == "pencil"){
+			holdingPencil = 1;
+		}
+		if(item.tag == "coffee"){
+			holdingCoffee = 1;
+		}
 
 	}
 
@@ -135,7 +167,12 @@ public class interaction : MonoBehaviour {
 				rigidthrow.AddForce(intern.transform.forward * randomX, ForceMode.Force);
 				iChild.parent = null;
 
-				holding = 0;
+				if(iChild.tag == "pencil"){
+					holdingPencil = 0;
+				}
+				if(iChild.tag == "coffee"){
+					holdingCoffee = 0;
+				}
 			}
 		}
 	}
