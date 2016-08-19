@@ -20,6 +20,8 @@ public class objectQuantity : MonoBehaviour {
 	private float randomX;
 	private float randomZ;
 
+	private GameObject[] findItems;
+
 	// Use this for initialization
 	void Start () {
 		quantity = gameObject.GetComponent<game_engine>();
@@ -46,6 +48,12 @@ public class objectQuantity : MonoBehaviour {
 				
 				randomX = (Mathf.Round(( Random.value * 10.0f))-5.0f);
 				randomZ = (Mathf.Round(( Random.value * 10.0f))-5.0f);
+//
+//				if gameObject object tag exists
+//					spawn likleyhood of this and this changes
+					
+				//findItems = GameObject.FindGameObjectsWithTag();
+
 
 				Instantiate(cubobj.Value, new Vector3(randomX, 10, randomZ), Quaternion.identity);
 			}
