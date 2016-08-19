@@ -17,6 +17,9 @@ public class objectQuantity : MonoBehaviour {
 	//find the object dictionary
 	public objectDictionary objectDictionary;
 
+	private float randomX;
+	private float randomZ;
+
 	// Use this for initialization
 	void Start () {
 		quantity = gameObject.GetComponent<game_engine>();
@@ -40,7 +43,11 @@ public class objectQuantity : MonoBehaviour {
 		foreach (KeyValuePair<int,GameObject> cubobj in objectDictionary.cubobjDictionary) {
 			if(cubobj.Key <= quantity.likes)
 			{
-				Instantiate(cubobj.Value, new Vector3(Random.Range (-5f, 5f), 10, Random.Range (-5f, 5f)), Quaternion.identity);
+				
+				randomX = (Mathf.Round(( Random.value * 10.0f))-5.0f);
+				randomZ = (Mathf.Round(( Random.value * 10.0f))-5.0f);
+
+				Instantiate(cubobj.Value, new Vector3(randomX, 10, randomZ), Quaternion.identity);
 			}
 		}
 
