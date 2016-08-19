@@ -16,11 +16,13 @@ public class fbInit : MonoBehaviour {
 	private int postCount;
 
 	public game_engine GameEngine;
+	public cubicleGeneration CubicleGeneration;
 
 	// Awake function from Unity's MonoBehavior
 	void Awake ()
 	{
 		GameEngine = gameObject.GetComponent<game_engine>();
+		CubicleGeneration = gameObject.GetComponent<cubicleGeneration> ();
 
 		perm = new List<string> () { "public_profile", "email", "user_friends", "user_posts" };
 
