@@ -14,15 +14,20 @@ public class fbInit : MonoBehaviour {
 
 	private int likeCount;
 	private int postCount;
+	private int postNumber;
 
 	public game_engine GameEngine;
 	public cubicleGeneration CubicleGeneration;
+	public objectDictionary ObjectGeneration;
+	bool start;
 
 	// Awake function from Unity's MonoBehavior
 	void Awake ()
 	{
+		start = false;
 		GameEngine = gameObject.GetComponent<game_engine>();
 		CubicleGeneration = gameObject.GetComponent<cubicleGeneration> ();
+		ObjectGeneration = gameObject.GetComponent<objectDictionary> ();
 
 		perm = new List<string> () { "public_profile", "email", "user_friends", "user_posts" };
 
@@ -55,7 +60,6 @@ public class fbInit : MonoBehaviour {
 		} else {
 			Debug.Log("User cancelled login");
 		}
-
 	}
 
 	private void postsCallback(IGraphResult result){
@@ -67,20 +71,23 @@ public class fbInit : MonoBehaviour {
 		var postList = new List<object> ();
 		postList = (List<object>)(FBUserDetails["data"]);
 
+		Debug.Log ("POST LIST: "+postList.Count);
+
 		foreach(object keyValue in postList)
 		{
 			var post = keyValue as Dictionary<string,object>;
 			var postID = post ["id"];
 			postCount++;
 			//Debug.Log ("ID: "  + postID);
-			FB.API ("/" + postID + "/likes", HttpMethod.GET,returnPostLikes,new Dictionary<string,string>(){}); 
+			FB.API ("/" + postID + "/likes", HttpMethod.GET, returnPostLikes, new Dictionary<string,string> (){ });
 		}
+			
 
 		GameEngine.posts = postCount;
 		GameEngine.setText ();
 	}
 
-	private void returnPostLikes(IGraphResult result){
+	public void returnPostLikes(IGraphResult result){
 		//Debug.Log ("Likes: " + result.RawResult);
 
 		Dictionary<string,object> likes;
@@ -97,11 +104,19 @@ public class fbInit : MonoBehaviour {
 			likesID = likes ["id"];
 			i = i + 1;
 			likeCount++;
-			Debug.Log ("LIKE ID: "  + likesID + ", TOTAL LIKE COUNT:" + likeCount + ", THIS POST LIKE COUNT: " + i);
+			//Debug.Log ("LIKE ID: "  + likesID + ", TOTAL LIKE COUNT:" + likeCount + ", THIS POST LIKE COUNT: " + i);
 
 		}
+
 		GameEngine.likes = likeCount;
 		GameEngine.setText ();
+
+		postNumber++;
+
+		if (postNumber >= postCount && start == false) {
+			ObjectGeneration.populateCubicles (likeCount);
+			start = true;
+		}
 	}
 
 }

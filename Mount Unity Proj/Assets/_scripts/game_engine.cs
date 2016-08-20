@@ -11,13 +11,16 @@ public class game_engine : MonoBehaviour {
 	public Text postText;
 
 	public cubicleGeneration CubicleGeneration;
+	public objectDictionary ObjectGeneration;
 
 	void Start () {
 		CubicleGeneration = gameObject.GetComponent<cubicleGeneration> ();
+		ObjectGeneration = gameObject.GetComponent<objectDictionary> ();
 		timer = 0;
 		likes = 0;
 		posts = 0;
 		setText();
+		ObjectGeneration.populateCubicles (likes);
 	}
 
 	// Update is called once per frame
@@ -32,6 +35,10 @@ public class game_engine : MonoBehaviour {
 			setText();
 		}
 
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			ObjectGeneration.populateCubicles (likes);
+		}
+
 		timer += 1;
 		if (timer > 500){
 			//Debug.Log(true);
@@ -43,9 +50,10 @@ public class game_engine : MonoBehaviour {
 //				posts -= 1;
 				//Debug.Log("Posts");
 //			}
-			if (likes > 50) {
-				CubicleGeneration.newCubicle ();
-			}
+//			Generate new cubicle
+//			if (likes > 50) {
+//				CubicleGeneration.newCubicle ();
+//			}
 
 			timer = 0;
 			setText();
@@ -57,6 +65,7 @@ public class game_engine : MonoBehaviour {
 		if(posts < 0){
 			posts = 0;
 		}
+
 	}
 
 	public void setText(){

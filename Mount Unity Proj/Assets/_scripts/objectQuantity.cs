@@ -22,41 +22,58 @@ public class objectQuantity : MonoBehaviour {
 
 	private GameObject[] findItems;
 
+	private int x;
+
 	// Use this for initialization
 	void Start () {
 		quantity = gameObject.GetComponent<game_engine>();
 		quality = gameObject.GetComponent<objectquality> ();
 		objectDictionary = gameObject.GetComponent<objectDictionary> ();
+		x = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
 		if (quantity.timer == 0) {
-			generateObject ();
+			//generateObject (quantity.likes);
 		}
 
-		if(Input.GetKeyDown ( KeyCode.Space))
-			generateObject ();
+		if(Input.GetKeyDown ( KeyCode.Space)){
+			//generateObject (quantity.likes);
+		}
 	}
 
-	void generateObject(){
+	public void generateObject(int quant){
+			
+		Debug.Log ("meta yolo: " + quant);
 
-		foreach (KeyValuePair<int,GameObject> cubobj in objectDictionary.cubobjDictionary) {
-			if(cubobj.Key <= quantity.likes)
-			{
-				
-				randomX = (Mathf.Round(( Random.value * 10.0f))-5.0f);
-				randomZ = (Mathf.Round(( Random.value * 10.0f))-5.0f);
+		if (x <= quant) {
+
+			foreach (KeyValuePair<int,GameObject> cubobj in objectDictionary.cubobjDictionary) {
+				Debug.Log ("meta meta yolo: " + quant);
+
+				if (cubobj.Key <= quantity.likes && x <= quant) {
+					Debug.Log ("meta meta meta yolo: " + quant);
+					randomX = (Mathf.Round ((Random.value * 10.0f)) - 5.0f);
+					randomZ = (Mathf.Round ((Random.value * 10.0f)) - 5.0f);
 //
 //				if gameObject object tag exists
 //					spawn likleyhood of this and this changes
 					
-				//findItems = GameObject.FindGameObjectsWithTag();
+					//findItems = GameObject.FindGameObjectsWithTag();
 
 
-				Instantiate(cubobj.Value, new Vector3(randomX, 10, randomZ), Quaternion.identity);
+					Instantiate (cubobj.Value, new Vector3 (randomX, 10, randomZ), Quaternion.identity);
+					x++;
+					Debug.Log ("x: " + x);
+				}
+
+			
 			}
+		} else {
+			Debug.Log ("DONE");
+			return;
 		}
 
 //		cubicleObject = quality.currentItem;
