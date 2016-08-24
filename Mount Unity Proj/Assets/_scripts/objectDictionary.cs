@@ -7,22 +7,24 @@ public class objectDictionary : MonoBehaviour {
 	public List<GameObject> cubicleObjects = new List<GameObject>();
 
 	public Dictionary<int,GameObject> cubobjDictionary;
-	public Dictionary<int,GameObject> weightDictionary;
+	public Dictionary<GameObject,float> weightDictionary;
 
-	private GameObject[] testWeight;
-	private string objTag;
+	public objectQuantity quantity;
+
+
+	private int objectQuant;
 
 	// Use this for initialization
 	void Start () {
+		quantity = gameObject.GetComponent<objectQuantity> ();
 		cubobjDictionary = new Dictionary<int,GameObject>();
+		weightDictionary = new Dictionary<GameObject,float> ();
 		makeObjectDictionary ();
 	}
-	
+		
 	// Update is called once per frame
 	void Update () {
-		if ( Input.GetKeyDown ( KeyCode.Space )){
-			weightObjects ();
-		}
+
 	}
 
 
@@ -33,29 +35,23 @@ public class objectDictionary : MonoBehaviour {
 		foreach(GameObject cubobj in cubicleObjects)
 		{
 			o = Random.Range (i * (10 + i * i) - 10, i * (10 + i * i) + 10);
-			//Debug.Log (o);
 			cubobjDictionary.Add (o,cubobj);
-			//Debug.Log (cubobjDictionary[o]);
+			Debug.Log (o + ": " + cubobjDictionary[o]);
 			i++;
 		}
 	}
-	//weight object generation based on which objects already exist
-	void weightObjects(){
 
-		int i = 0;
+	public void populateCubicles(int likes){
+		
+		objectQuant = Random.Range(0, (likes/10));
 
-		foreach (GameObject cubobj in cubicleObjects) {
+		Debug.Log ("Number of objects: " + objectQuant);
 
-			objTag = cubobj.tag;
-			//find how many of each game object is in the scene
-			testWeight = GameObject.FindGameObjectsWithTag (objTag);
-
-			Debug.Log(cubobj + ": " + testWeight.Length);
-
-//			foreach (GameObject objectWeight in testWeight) {
-//				weightDictionary.ADD ();
-//				i++;
-//			}
+		for(int i = 0; i <= objectQuant; i++)
+		{
+			Debug.Log ("yolo: " + objectQuant);
+			quantity.generateObject(objectQuant);
 		}
 	}
+
 }
