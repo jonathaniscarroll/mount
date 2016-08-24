@@ -71,7 +71,11 @@
      <Compile Include="Assets\_scripts\rotate_pillar.cs" />
      <Compile Include="Assets\_scripts\saveItems.cs" />
      <Compile Include="Assets\_scripts\text.cs" />
+     <Compile Include="Assets\_scripts\textscroller.cs" />
+     <Compile Include="Assets\_scripts\textscrollermove.cs" />
+     <Compile Include="Assets\shaders\ReverseNormals.cs" />
      <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasic.shader" />
+     <None Include="Assets\shaders\GUI3D Text Shader.shader" />
      <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasicOutline.shader" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
      <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLitOutline.shader" />
