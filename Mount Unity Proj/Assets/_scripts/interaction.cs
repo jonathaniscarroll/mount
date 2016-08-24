@@ -13,6 +13,7 @@ public class interaction : MonoBehaviour {
 
 	private int holdingPencil;
 	private int holdingCoffee;
+	private int holdingPaper;
 
 	//throwing stuff stuff
 	public Rigidbody rigidthrow;
@@ -30,6 +31,8 @@ public class interaction : MonoBehaviour {
 	public LineRenderer render;
 	public int drawLength = 19; 
 
+	public TextMesh textMesh;
+
 	//laptop text stuff;
 	public Text laptoptext;
 
@@ -40,6 +43,7 @@ public class interaction : MonoBehaviour {
 		counter = 0;
 		holdingPencil = 0;
 		holdingCoffee = 0;
+		holdingPaper = 0;
 		render.SetVertexCount(drawLength);
 		render.enabled = false;
 
@@ -67,7 +71,21 @@ public class interaction : MonoBehaviour {
 				}
 			}
 		}
+		if(holdingPaper == 1 && holdingPencil == 1){
 			
+			foreach (Transform iChild in intern.transform){
+				if (iChild.tag == "paper") {
+					foreach (Transform paperChild in iChild.transform){
+						if (paperChild.tag == "writing") {
+					Debug.Log("writing time");
+					//render.SetPosition(intern.transform.position.x,intern.transform.position.y,intern.transform.position.z);
+					textMesh = paperChild.GetComponent<TextMesh>();
+					textMesh.text = "test test test";
+				}
+			}
+				}
+			}
+		}	
 	}
 
 	void OnTriggerEnter (Collider col) {
@@ -98,7 +116,7 @@ public class interaction : MonoBehaviour {
 			//get collider's game object, put that into pickuphold
 			if(holdingCoffee == 0){
 				PickUpandHold (col.gameObject);
-				render.enabled = true;
+				//render.enabled = true;
 			}
 			if(holdingCoffee == 1){
 				ThrowAwayItem ("coffee");
@@ -106,6 +124,16 @@ public class interaction : MonoBehaviour {
 			}
 			//Debug.Log(col.gameObject);
 
+		}
+
+		if(col.tag == "paper"){
+			if(holdingPaper == 0){
+				PickUpandHold (col.gameObject);
+			}
+			if(holdingPaper == 1){
+				ThrowAwayItem ("paper");
+				PickUpandHold (col.gameObject);
+			}
 		}
 
 		if(col.tag == "laptop"){
@@ -149,6 +177,9 @@ public class interaction : MonoBehaviour {
 		if(item.tag == "coffee"){
 			holdingCoffee = 1;
 		}
+		if(item.tag == "paper"){
+			holdingPaper = 1;
+		}
 
 	}
 
@@ -172,6 +203,9 @@ public class interaction : MonoBehaviour {
 				}
 				if(iChild.tag == "coffee"){
 					holdingCoffee = 0;
+				}
+				if(iChild.tag == "paper"){
+					holdingPaper = 0;
 				}
 			}
 		}
