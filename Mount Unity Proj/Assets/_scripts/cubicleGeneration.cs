@@ -26,8 +26,8 @@ public class cubicleGeneration : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyDown (KeyCode.Space))
-			newCubicle ();
+//		if (Input.GetKeyDown (KeyCode.Space))
+//			newCubicle ();
 	
 	}
 
@@ -47,7 +47,7 @@ public class cubicleGeneration : MonoBehaviour {
 		newestCubicle = Instantiate (cubicle, newCubiclePos, Quaternion.identity) as GameObject;
 		cubiclePos = newestCubicle.transform.position;
 		directions.Clear();
-		Debug.Log (cubiclePos);
+		//Debug.Log (cubiclePos);
 	}
 
 	void newDirection(){

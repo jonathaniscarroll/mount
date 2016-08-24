@@ -68,6 +68,7 @@
      <Compile Include="Assets\_scripts\objectDictionary.cs" />
      <Compile Include="Assets\_scripts\objectQuantity.cs" />
      <Compile Include="Assets\_scripts\objectquality.cs" />
+     <Compile Include="Assets\_scripts\phpComm.cs" />
      <Compile Include="Assets\_scripts\rotate_pillar.cs" />
      <Compile Include="Assets\_scripts\saveItems.cs" />
      <Compile Include="Assets\_scripts\text.cs" />
