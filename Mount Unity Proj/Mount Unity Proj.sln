@@ -1,7 +1,11 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
+Project("{2BACF57E-8C45-E095-E8CD-F6B6058B563E}") = "Mount Unity Proj", "Assembly-CSharp-firstpass.csproj", "{9DBC951C-4106-E7E1-5C13-0E3E80235651}"
+EndProject
 Project("{2BACF57E-8C45-E095-E8CD-F6B6058B563E}") = "Mount Unity Proj", "Assembly-CSharp.csproj", "{EA842D3C-2DCA-71F3-F81A-218146A825DB}"
+EndProject
+Project("{2BACF57E-8C45-E095-E8CD-F6B6058B563E}") = "Mount Unity Proj", "Assembly-CSharp-Editor.csproj", "{065FC1E2-DD29-C4AC-E22E-A666FF0080EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +13,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9DBC951C-4106-E7E1-5C13-0E3E80235651}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DBC951C-4106-E7E1-5C13-0E3E80235651}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DBC951C-4106-E7E1-5C13-0E3E80235651}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DBC951C-4106-E7E1-5C13-0E3E80235651}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EA842D3C-2DCA-71F3-F81A-218146A825DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EA842D3C-2DCA-71F3-F81A-218146A825DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA842D3C-2DCA-71F3-F81A-218146A825DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA842D3C-2DCA-71F3-F81A-218146A825DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{065FC1E2-DD29-C4AC-E22E-A666FF0080EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{065FC1E2-DD29-C4AC-E22E-A666FF0080EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{065FC1E2-DD29-C4AC-E22E-A666FF0080EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{065FC1E2-DD29-C4AC-E22E-A666FF0080EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
