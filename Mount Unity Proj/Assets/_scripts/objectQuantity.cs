@@ -64,7 +64,7 @@ public class objectQuantity : MonoBehaviour {
 					//findItems = GameObject.FindGameObjectsWithTag();
 
 
-					Instantiate (cubobj.Value, new Vector3 (randomX, 10, randomZ), Quaternion.identity);
+					Instantiate (cubobj.Value, new Vector3 (randomX, 10, randomZ), Quaternion.Euler(145,-45,180));
 					x++;
 					//Debug.Log ("x: " + x);
 				}

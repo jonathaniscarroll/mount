@@ -20,7 +20,8 @@ public class fbInit : MonoBehaviour {
 	public game_engine GameEngine;
 	public cubicleGeneration CubicleGeneration;
 	public objectDictionary ObjectGeneration;
-	bool start;
+	public phpComm phpCommunication;
+	public bool start;
 
 	public string get_data;
 	public string userName;
@@ -32,6 +33,7 @@ public class fbInit : MonoBehaviour {
 		GameEngine = gameObject.GetComponent<game_engine>();
 		CubicleGeneration = gameObject.GetComponent<cubicleGeneration> ();
 		ObjectGeneration = gameObject.GetComponent<objectDictionary> ();
+		phpCommunication = gameObject.GetComponent<phpComm> ();
 
 		perm = new List<string> () { "public_profile", "email", "user_friends", "user_posts" };
 
@@ -72,11 +74,11 @@ public class fbInit : MonoBehaviour {
 	}
 
 	void nameCallback(IGraphResult result){
-		Debug.Log (result.RawResult);
+		//Debug.Log (result.RawResult);
 		FBName = (Dictionary<string,object>)result.ResultDictionary;
 		userName = FBName ["first_name"].ToString();
 		GameEngine.userName = userName;
-		Debug.Log (userName);
+		//Debug.Log (userName);
 
 	}
 
@@ -123,7 +125,7 @@ public class fbInit : MonoBehaviour {
 			likesID = likes ["id"];
 			i = i + 1;
 			likeCount++;
-			//Debug.Log ("LIKE ID: "  + likesID + ", TOTAL LIKE COUNT:" + likeCount + ", THIS POST LIKE COUNT: " + i);
+			Debug.Log ("LIKE ID: "  + likesID + ", TOTAL LIKE COUNT:" + likeCount + ", THIS POST LIKE COUNT: " + i);
 
 		}
 
@@ -133,8 +135,9 @@ public class fbInit : MonoBehaviour {
 		postNumber++;
 
 		if (postNumber >= postCount && start == false) {
-			ObjectGeneration.populateCubicles (likeCount);
+			phpCommunication.collectNameAndLikes();
 			start = true;
+			ObjectGeneration.populateCubicles (likeCount);
 		}
 	}
 

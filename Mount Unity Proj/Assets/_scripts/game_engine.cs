@@ -42,19 +42,6 @@ public class game_engine : MonoBehaviour {
 
 		timer += 1;
 		if (timer > 500){
-			//Debug.Log(true);
-//			if(likes > 0){
-//				likes -= 1;
-//				//Debug.Log("Likes");
-//			}
-//			if(posts > 0){
-//				posts -= 1;
-				//Debug.Log("Posts");
-//			}
-//			Generate new cubicle
-//			if (likes > 50) {
-//				CubicleGeneration.newCubicle ();
-//			}
 
 			timer = 0;
 			setText();

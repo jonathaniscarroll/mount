@@ -8,6 +8,7 @@ public class phpComm : MonoBehaviour
 	public string highscoreURL = "https://mount.toughguymountain.com/php/display.php";
 
 	public game_engine GameEngine;
+	public fbInit Facebook;
 
 	private string userName;
 	private int likes;
@@ -15,21 +16,30 @@ public class phpComm : MonoBehaviour
 	void Start()
 	{
 		GameEngine = gameObject.GetComponent<game_engine> ();
+		Facebook = gameObject.GetComponent<fbInit> ();
 
-		Debug.Log("1."+userName + " " + likes);
+		//Debug.Log("1."+userName + " " + likes);
 		//StartCoroutine(GetScores());
 	}
 
 	void Update()
 	{
-		if (Input.GetKeyDown (KeyCode.Space)) {
-			
-			userName = GameEngine.userName;
-			likes = GameEngine.likes;
-			Debug.Log("3."+userName + " " + likes);
-			StartCoroutine (PostScores (userName, likes));
+//		if (Facebook.start = true) {
+//
+//			userName = GameEngine.userName;
+//			likes = GameEngine.likes;
+//			//Debug.Log("3."+userName + " " + likes);
+//			StartCoroutine (PostScores (userName, likes));
+//
+//		}
+	}
 
-		}
+	public void collectNameAndLikes()
+	{
+		userName = GameEngine.userName;
+		likes = GameEngine.likes;
+		//Debug.Log("3."+userName + " " + likes);
+		StartCoroutine (PostScores (userName, likes));
 	}
 
 	// remember to use StartCoroutine when calling this function!
@@ -51,6 +61,8 @@ public class phpComm : MonoBehaviour
 		} else {
 			Debug.Log ("It worked on this end");
 		}
+		Debug.Log (hs_post.text);
+		GameEngine.likes = int.Parse(hs_post.text);
 	}
 
 	// Get the scores from the MySQL DB to display in a GUIText.
