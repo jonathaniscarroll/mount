@@ -26,10 +26,13 @@ public class fbInit : MonoBehaviour {
 	public string get_data;
 	public string userName;
 
+	public bool firstPost;
+
 	// Awake function from Unity's MonoBehavior
 	void Awake ()
 	{
 		start = false;
+		firstPost = false;
 		GameEngine = gameObject.GetComponent<game_engine>();
 		CubicleGeneration = gameObject.GetComponent<cubicleGeneration> ();
 		ObjectGeneration = gameObject.GetComponent<objectDictionary> ();
@@ -92,14 +95,14 @@ public class fbInit : MonoBehaviour {
 		var postList = new List<object> ();
 		postList = (List<object>)(FBUserDetails["data"]);
 
-//		Debug.Log ("POST LIST: "+postList.Count);
+		Debug.Log ("POST LIST: "+postList.Count);
 
 		foreach(object keyValue in postList)
 		{
 			var post = keyValue as Dictionary<string,object>;
 			var postID = post ["id"];
 			postCount++;
-			//Debug.Log ("ID: "  + postID);
+			Debug.Log ("Post ID: "  + postID);
 			FB.API ("/" + postID + "/likes", HttpMethod.GET, returnPostLikes, new Dictionary<string,string> (){ });
 		}
 			
@@ -118,14 +121,20 @@ public class fbInit : MonoBehaviour {
 		PostDetails = (Dictionary<string,object>)result.ResultDictionary;
 		var postParts = new List<object> ();
 		postParts = (List<object>)(PostDetails["data"]);
+		Debug.Log("This Post Like Count: "+postParts.Count ());
 
 		foreach(object keyValue in postParts)
 		{
 			likes = keyValue as Dictionary<string,object>;
 			likesID = likes ["id"];
+			//send to the phpComm script as the first like.
+			if (firstPost = false) {
+				phpCommunication.registerLikes(likesID);
+				firstPost = true;
+			}
 			i = i + 1;
 			likeCount++;
-			Debug.Log ("LIKE ID: "  + likesID + ", TOTAL LIKE COUNT:" + likeCount + ", THIS POST LIKE COUNT: " + i);
+			//Debug.Log ("LIKE ID: "  + likesID + ", TOTAL LIKE COUNT:" + likeCount + ", THIS POST LIKE COUNT: " + i);
 
 		}
 

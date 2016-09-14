@@ -5,13 +5,16 @@ public class phpComm : MonoBehaviour
 {
 	private string secretKey = "mySecretKey"; // Edit this value and make sure it's the same as the one stored on the server
 	public string addScoreURL = "https://mount.toughguymountain.com/php/addscore.php?"; //be sure to add a ? to your url
-	public string highscoreURL = "https://mount.toughguymountain.com/php/display.php";
+	//public string highscoreURL = "https://mount.toughguymountain.com/php/display.php";
+	public string registerlikesURL = "https://mount.toughguymountain.com/php/registerlikes.php?";
 
 	public game_engine GameEngine;
 	public fbInit Facebook;
 
 	private string userName;
 	private int likes;
+
+	public int firstLike;
 
 	void Start()
 	{
@@ -63,6 +66,12 @@ public class phpComm : MonoBehaviour
 		}
 		Debug.Log (hs_post.text);
 		GameEngine.likes = int.Parse(hs_post.text);
+	}
+
+	public void registerLikes(int ID)
+	{
+		
+			
 	}
 
 	// Get the scores from the MySQL DB to display in a GUIText.
