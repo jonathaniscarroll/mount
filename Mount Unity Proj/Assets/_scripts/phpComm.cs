@@ -25,18 +25,6 @@ public class phpComm : MonoBehaviour
 		//StartCoroutine(GetScores());
 	}
 
-	void Update()
-	{
-//		if (Facebook.start = true) {
-//
-//			userName = GameEngine.userName;
-//			likes = GameEngine.likes;
-//			//Debug.Log("3."+userName + " " + likes);
-//			StartCoroutine (PostScores (userName, likes));
-//
-//		}
-	}
-
 	public void collectNameAndLikes()
 	{
 		userName = GameEngine.userName;
@@ -50,7 +38,7 @@ public class phpComm : MonoBehaviour
 	{
 		//This connects to a server side php script that will add the name and score to a MySQL DB.
 		// Supply it with a string representing the players name and the players score.
-		Debug.Log("2." + name + " " + score);
+		//Debug.Log("2." + name + " " + score);
 		string hash = GameEngine.Md5Sum(name + score + secretKey);
 
 		string post_url = addScoreURL + "name=" + WWW.EscapeURL(name) + "&score=" + score + "&hash=" + hash;
@@ -64,32 +52,36 @@ public class phpComm : MonoBehaviour
 		} else {
 			Debug.Log ("It worked on this end");
 		}
+
 		Debug.Log (hs_post.text);
 		GameEngine.likes = int.Parse(hs_post.text);
 	}
 
-	public void registerLikes(int ID)
+	public void registerLikes(string likeID, string name)
 	{
-		
-			
+		Debug.Log ("First Post " + likeID);
+		Debug.Log(float.Parse(likeID));
+		StartCoroutine(PostLikes(likeID,name));
 	}
 
-	// Get the scores from the MySQL DB to display in a GUIText.
-	// remember to use StartCoroutine when calling this function!
-//	IEnumerator GetScores()
-//	{
-//		gameObject.GetComponent<GUIText>().text = "Loading Scores";
-//		WWW hs_get = new WWW(highscoreURL);
-//		yield return hs_get;
-//
-//		if (hs_get.error != null)
-//		{
-//			print("There was an error getting the high score: " + hs_get.error);
-//		}
-//		else
-//		{
-//			gameObject.GetComponent<GUIText>().text = hs_get.text; // this is a GUIText that will display the scores in game.
-//		}
-//	}
+	IEnumerator PostLikes(string likeID, string name)
+	{
+		string hash = GameEngine.Md5Sum(name + secretKey);
+		string checkLikeID = registerlikesURL + "name=" + WWW.EscapeURL (name) + "&likeID=" + likeID + "&hash=" + hash;
+		WWW likeID_post = new WWW (checkLikeID);
+		yield return likeID_post;
+
+		if (likeID_post.error != null) {
+			print ("There was an error retrieving the like quantity: " + likeID_post.error);
+		} else {
+			Debug.Log ("like quantity worked on this end");
+		}
+
+		string result = likeID_post.text;
+		if (result == "stop") {
+			Facebook.newLike = false;
+		}
+		Debug.Log (likeID_post.text);
+	}
 
 }

@@ -77,7 +77,7 @@ public class interaction : MonoBehaviour {
 				if (iChild.tag == "paper") {
 					foreach (Transform paperChild in iChild.transform){
 						if (paperChild.tag == "writing") {
-					Debug.Log("writing time");
+					//Debug.Log("writing time");
 					//render.SetPosition(intern.transform.position.x,intern.transform.position.y,intern.transform.position.z);
 					textMesh = paperChild.GetComponent<TextMesh>();
 					textMesh.text = "test test test";

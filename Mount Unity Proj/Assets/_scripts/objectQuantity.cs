@@ -72,7 +72,7 @@ public class objectQuantity : MonoBehaviour {
 			
 			}
 		} else {
-			Debug.Log ("DONE");
+			//Debug.Log ("DONE");
 			return;
 		}
 
