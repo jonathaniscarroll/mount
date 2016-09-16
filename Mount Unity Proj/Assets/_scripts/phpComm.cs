@@ -59,8 +59,7 @@ public class phpComm : MonoBehaviour
 
 	public void registerLikes(string likeID, string name)
 	{
-		Debug.Log ("First Post " + likeID);
-		Debug.Log(float.Parse(likeID));
+		//Debug.Log ("First Post " + likeID);
 		StartCoroutine(PostLikes(likeID,name));
 	}
 
@@ -72,16 +71,17 @@ public class phpComm : MonoBehaviour
 		yield return likeID_post;
 
 		if (likeID_post.error != null) {
-			print ("There was an error retrieving the like quantity: " + likeID_post.error);
+			//print ("There was an error retrieving the like quantity: " + likeID_post.error);
 		} else {
-			Debug.Log ("like quantity worked on this end");
+			//Debug.Log ("like quantity worked on this end");
 		}
 
 		string result = likeID_post.text;
 		if (result == "stop") {
+			Debug.Log ("Stopper");
 			Facebook.newLike = false;
 		}
-		Debug.Log (likeID_post.text);
+		//Debug.Log ("RESULT " + result);
 	}
 
 }
