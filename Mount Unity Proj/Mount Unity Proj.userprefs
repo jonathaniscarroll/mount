@@ -1,11 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_scripts/interaction.cs">
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="Assets/_scripts/fbInit.cs" Line="114" Column="16" />
-      <File FileName="Assets/_scripts/textscroller.cs" Line="11" Column="17" />
-      <File FileName="Assets/_scripts/textscrollermove.cs" Line="21" Column="1" />
-      <File FileName="Assets/_scripts/interaction.cs" Line="83" Column="39" />
+      <File FileName="Assets/_scripts/fbInit.cs" Line="1" Column="1" />
+      <File FileName="Assets/_scripts/textscroller.cs" Line="1" Column="1" />
+      <File FileName="Assets/_scripts/textscrollermove.cs" Line="1" Column="1" />
+      <File FileName="Assets/_scripts/interaction.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
