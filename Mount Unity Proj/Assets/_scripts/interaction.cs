@@ -159,7 +159,7 @@ public class interaction : MonoBehaviour {
 	}
 
 	void PickUpandHold (GameObject item) {
-		Vector3 internPosiHold = new Vector3 (transform.position.x, 2.0f, transform.position.z);
+		Vector3 internPosiHold = new Vector3 (item.transform.position.x, 2.0f, item.transform.position.z);
 
 		//item.transform.Translate(internPosiHold * (Time.deltaTime * 0.1f), Space.Self);
 	

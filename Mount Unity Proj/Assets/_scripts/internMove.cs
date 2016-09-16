@@ -35,14 +35,11 @@ public class internMove : MonoBehaviour {
 				newGoal();
 				agent.speed = 0.0f;
 				agent.angularSpeed = 0;
-				//agent.acceleration = 0;
 			}
 		if(interacting.counter > 250){
 			action = false;
 			newGoal();
-		}
-		//Debug.Log(action);
-	}
+		}	}
 
 	void newGoal () {
 		if(action == false){
