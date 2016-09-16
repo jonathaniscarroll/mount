@@ -12,6 +12,8 @@ public class fbInit : MonoBehaviour {
 	private Dictionary<string,object> PostDetails;
 	private Dictionary<string,object> FBName;
 	private string fbID;
+	private List<string> likeList;
+	private List<string> postList;
 
 	private int likeCount;
 	private int postCount;
@@ -22,6 +24,10 @@ public class fbInit : MonoBehaviour {
 	public objectDictionary ObjectGeneration;
 	public phpComm phpCommunication;
 	public bool start;
+	public Dictionary<string,string> recentLikePerPost;
+
+	public string likeID;
+	public string postID;
 
 	public string get_data;
 	public string userName;
@@ -37,6 +43,10 @@ public class fbInit : MonoBehaviour {
 		CubicleGeneration = gameObject.GetComponent<cubicleGeneration> ();
 		ObjectGeneration = gameObject.GetComponent<objectDictionary> ();
 		phpCommunication = gameObject.GetComponent<phpComm> ();
+
+		recentLikePerPost = new Dictionary<string,string> ();
+		postList = new List<string> ();
+		likeList = new List<string> ();
 
 		perm = new List<string> () { "public_profile", "email", "user_friends", "user_posts" };
 
@@ -100,9 +110,11 @@ public class fbInit : MonoBehaviour {
 		foreach(object keyValue in postList)
 		{
 			var post = keyValue as Dictionary<string,object>;
-			var postID = post ["id"];
+			postID = post ["id"].ToString();
+			//add to the list of posts
+			postList.Add (postID);
 			postCount++;
-			//Debug.Log ("Post ID: "  + postID);
+
 			FB.API ("/" + postID + "/likes", HttpMethod.GET, returnPostLikes, new Dictionary<string,string> (){ });
 		}
 			
@@ -115,28 +127,25 @@ public class fbInit : MonoBehaviour {
 		//Debug.Log ("Likes: " + result.RawResult);
 
 		Dictionary<string,object> likes;
-		object likesID;
 		int i = 0;
 
 		PostDetails = (Dictionary<string,object>)result.ResultDictionary;
 		var postParts = new List<object> ();
 		postParts = (List<object>)(PostDetails["data"]);
 		//Debug.Log("This Post Like Count: "+postParts.Count ());
+		newLike = true;
 
 		foreach(object keyValue in postParts)
 		{
 			likes = keyValue as Dictionary<string,object>;
-			likesID = likes ["id"];
-			Debug.Log (likesID);
-			//send to the phpComm script as the first like.
+			likeID = likes ["id"].ToString();
+
+			//Debug.Log (likesID);
+			//if it is the first like of this post, add the the list of first likes
 			if (newLike == true) {
-				string likesIDString = likesID.ToString ();
-				//Debug.Log("String Length: " + likesIDString.Length);
-				phpCommunication.registerLikes (likesIDString, userName);
-				//newLike = true;
-			} else {
-				break;
-			}
+				likeList.Add(likeID);
+				newLike = false;
+			} 
 			i = i + 1;
 			likeCount++;
 			//Debug.Log ("LIKE ID: "  + likesID + ", TOTAL LIKE COUNT:" + likeCount + ", THIS POST LIKE COUNT: " + i);
@@ -149,6 +158,11 @@ public class fbInit : MonoBehaviour {
 		postNumber++;
 
 		if (postNumber >= postCount && start == false) {
+			foreach(KeyValuePair<string, string> entry in recentLikePerPost)
+			{
+				Debug.Log (entry);
+			}
+
 			phpCommunication.collectNameAndLikes();
 			start = true;
 			ObjectGeneration.populateCubicles (likeCount);
