@@ -33,6 +33,8 @@ public class interaction : MonoBehaviour {
 
 	public TextMesh textMesh;
 
+	private bool worked;
+
 	//laptop text stuff;
 	public Text laptoptext;
 
@@ -61,6 +63,7 @@ public class interaction : MonoBehaviour {
 
 				acting.action = false;
 				counter = 0;
+				Debug.Log("coutner complete");
 			}
 		}
 		if(holdingPencil == 1){
@@ -72,7 +75,6 @@ public class interaction : MonoBehaviour {
 			}
 		}
 		if(holdingPaper == 1 && holdingPencil == 1){
-			
 			foreach (Transform iChild in intern.transform){
 				if (iChild.tag == "paper") {
 					foreach (Transform paperChild in iChild.transform){
@@ -90,7 +92,8 @@ public class interaction : MonoBehaviour {
 
 	void OnTriggerEnter (Collider col) {
 		//Debug.Log(col.tag);
-
+		if (worked == false){
+			worked = true;
 		if(col.tag == "chair"){
 			roll = Random.value * 100;
 			//Debug.Log(roll);
@@ -156,6 +159,11 @@ public class interaction : MonoBehaviour {
 			rotater.AddForce(0,500,0, ForceMode.Acceleration);
 			rotater.AddTorque(0, 1000, 0, ForceMode.Acceleration);
 		}
+		}
+	}
+
+	void OnTriggerExit (Collider item){
+		worked = false;
 	}
 
 	void PickUpandHold (GameObject item) {

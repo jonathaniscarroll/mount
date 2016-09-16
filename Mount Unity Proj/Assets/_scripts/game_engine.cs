@@ -8,7 +8,9 @@ public class game_engine : MonoBehaviour {
 	public int timer;
 	public string userName;
 
-	public Text likeText;
+	public GameObject likeText;
+	//public Text likeText;
+	public TextMesh textupdate;
 	public Text postText;
 
 	public cubicleGeneration CubicleGeneration;
@@ -17,6 +19,7 @@ public class game_engine : MonoBehaviour {
 	void Start () {
 		CubicleGeneration = gameObject.GetComponent<cubicleGeneration> ();
 		ObjectGeneration = gameObject.GetComponent<objectDictionary> ();
+
 		timer = 0;
 		likes = 0;
 		posts = 0;
@@ -42,10 +45,8 @@ public class game_engine : MonoBehaviour {
 
 		timer += 1;
 		if (timer > 500){
-
 			timer = 0;
 			setText();
-
 		}
 		if(likes < 0){
 			likes = 0;
@@ -53,12 +54,11 @@ public class game_engine : MonoBehaviour {
 		if(posts < 0){
 			posts = 0;
 		}
-
 	}
 
 	public void setText(){
-		likeText.text = "likes = " + likes.ToString();
-		postText.text = "posts = " + posts.ToString();
+		likeText.GetComponent<TextMesh>().text = "likes = " + likes.ToString();
+//		postText.text = "posts = " + posts.ToString();
 	}
 
 	public  string Md5Sum(string strToEncrypt)
@@ -77,8 +77,6 @@ public class game_engine : MonoBehaviour {
 		{
 			hashString += System.Convert.ToString(hashBytes[i], 16).PadLeft(2, '0');
 		}
-
 		return hashString.PadLeft(32, '0');
 	}
-		
 }
