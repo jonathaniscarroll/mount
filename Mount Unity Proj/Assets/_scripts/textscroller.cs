@@ -15,7 +15,8 @@ public class textscroller : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetKeyUp(KeyCode.T)){
-			Instantiate(slidingtext,starttext.transform.position, Quaternion.identity);
+			//Instantiate(slidingtext,starttext.transform.position, Quaternion.identity);
+			slidingtext.transform.position = starttext.transform.position;
 		}
 	}
 }
