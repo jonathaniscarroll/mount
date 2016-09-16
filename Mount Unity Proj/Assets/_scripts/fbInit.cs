@@ -127,12 +127,13 @@ public class fbInit : MonoBehaviour {
 		{
 			likes = keyValue as Dictionary<string,object>;
 			likesID = likes ["id"];
+			Debug.Log (likesID);
 			//send to the phpComm script as the first like.
 			if (newLike == true) {
 				string likesIDString = likesID.ToString ();
 				//Debug.Log("String Length: " + likesIDString.Length);
 				phpCommunication.registerLikes (likesIDString, userName);
-				newLike = true;
+				//newLike = true;
 			} else {
 				break;
 			}
