@@ -10,6 +10,7 @@ public class fbInit : MonoBehaviour {
 	List<string> perm;
 	private Dictionary<string,object> FBUserDetails;
 	private Dictionary<string,object> PostDetails;
+	private Dictionary<string,object> FBName;
 	private string fbID;
 
 	private int likeCount;
@@ -19,15 +20,23 @@ public class fbInit : MonoBehaviour {
 	public game_engine GameEngine;
 	public cubicleGeneration CubicleGeneration;
 	public objectDictionary ObjectGeneration;
-	bool start;
+	public phpComm phpCommunication;
+	public bool start;
+
+	public string get_data;
+	public string userName;
+
+	public bool firstPost;
 
 	// Awake function from Unity's MonoBehavior
 	void Awake ()
 	{
 		start = false;
+		firstPost = false;
 		GameEngine = gameObject.GetComponent<game_engine>();
 		CubicleGeneration = gameObject.GetComponent<cubicleGeneration> ();
 		ObjectGeneration = gameObject.GetComponent<objectDictionary> ();
+		phpCommunication = gameObject.GetComponent<phpComm> ();
 
 		perm = new List<string> () { "public_profile", "email", "user_friends", "user_posts" };
 
@@ -42,25 +51,40 @@ public class fbInit : MonoBehaviour {
 		FB.LogInWithReadPermissions(perm, AuthCallback);
 	}
 
-	void retrievePosts(){
-		FB.API ("/me/posts", HttpMethod.GET,postsCallback,new Dictionary<string,string>(){});
-	}
-
 	private void AuthCallback (ILoginResult result) {
 		if (FB.IsLoggedIn) {
 			// AccessToken class will have session details
 			var aToken = Facebook.Unity.AccessToken.CurrentAccessToken;
 			// Print current access token's User ID
-			Debug.Log(aToken.UserId);
+			//Debug.Log(aToken.UserId);
 			// Print current access token's granted permissions
 //			foreach (string perm in Facebook.Unity.AccessToken.CurrentAccessToken.Permissions) {
 //				Debug.Log(perm);
 //			}
 			retrievePosts ();
+			retrieveName ();
 		} else {
 			Debug.Log("User cancelled login");
 		}
 	}
+
+	void retrievePosts(){
+		FB.API ("/me/posts", HttpMethod.GET,postsCallback,new Dictionary<string,string>(){});
+	}
+
+	void retrieveName(){
+		FB.API("/me?fields=first_name", HttpMethod.GET, nameCallback);
+	}
+
+	void nameCallback(IGraphResult result){
+		//Debug.Log (result.RawResult);
+		FBName = (Dictionary<string,object>)result.ResultDictionary;
+		userName = FBName ["first_name"].ToString();
+		GameEngine.userName = userName;
+		//Debug.Log (userName);
+
+	}
+
 
 	private void postsCallback(IGraphResult result){
 
@@ -78,7 +102,7 @@ public class fbInit : MonoBehaviour {
 			var post = keyValue as Dictionary<string,object>;
 			var postID = post ["id"];
 			postCount++;
-			//Debug.Log ("ID: "  + postID);
+			Debug.Log ("Post ID: "  + postID);
 			FB.API ("/" + postID + "/likes", HttpMethod.GET, returnPostLikes, new Dictionary<string,string> (){ });
 		}
 			
@@ -97,11 +121,17 @@ public class fbInit : MonoBehaviour {
 		PostDetails = (Dictionary<string,object>)result.ResultDictionary;
 		var postParts = new List<object> ();
 		postParts = (List<object>)(PostDetails["data"]);
+		Debug.Log("This Post Like Count: "+postParts.Count ());
 
 		foreach(object keyValue in postParts)
 		{
 			likes = keyValue as Dictionary<string,object>;
 			likesID = likes ["id"];
+			//send to the phpComm script as the first like.
+			if (firstPost = false) {
+				phpCommunication.registerLikes(likesID);
+				firstPost = true;
+			}
 			i = i + 1;
 			likeCount++;
 			//Debug.Log ("LIKE ID: "  + likesID + ", TOTAL LIKE COUNT:" + likeCount + ", THIS POST LIKE COUNT: " + i);
@@ -114,8 +144,9 @@ public class fbInit : MonoBehaviour {
 		postNumber++;
 
 		if (postNumber >= postCount && start == false) {
-			ObjectGeneration.populateCubicles (likeCount);
+			phpCommunication.collectNameAndLikes();
 			start = true;
+			ObjectGeneration.populateCubicles (likeCount);
 		}
 	}
 

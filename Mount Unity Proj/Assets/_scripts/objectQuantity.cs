@@ -46,15 +46,15 @@ public class objectQuantity : MonoBehaviour {
 
 	public void generateObject(int quant){
 			
-		Debug.Log ("meta yolo: " + quant);
+		//Debug.Log ("meta yolo: " + quant);
 
 		if (x <= quant) {
 
 			foreach (KeyValuePair<int,GameObject> cubobj in objectDictionary.cubobjDictionary) {
-				Debug.Log ("meta meta yolo: " + quant);
+				//Debug.Log ("meta meta yolo: " + quant);
 
 				if (cubobj.Key <= quantity.likes && x <= quant) {
-					Debug.Log ("meta meta meta yolo: " + quant);
+//					Debug.Log ("meta meta meta yolo: " + quant);
 					randomX = (Mathf.Round ((Random.value * 10.0f)) - 5.0f);
 					randomZ = (Mathf.Round ((Random.value * 10.0f)) - 5.0f);
 //
@@ -64,9 +64,9 @@ public class objectQuantity : MonoBehaviour {
 					//findItems = GameObject.FindGameObjectsWithTag();
 
 
-					Instantiate (cubobj.Value, new Vector3 (randomX, 10, randomZ), Quaternion.identity);
+					Instantiate (cubobj.Value, new Vector3 (randomX, 10, randomZ), Quaternion.Euler(145,-45,180));
 					x++;
-					Debug.Log ("x: " + x);
+					//Debug.Log ("x: " + x);
 				}
 
 			

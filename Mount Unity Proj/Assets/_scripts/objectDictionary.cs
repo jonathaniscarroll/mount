@@ -36,7 +36,7 @@ public class objectDictionary : MonoBehaviour {
 		{
 			o = Random.Range (i * (10 + i * i) - 10, i * (10 + i * i) + 10);
 			cubobjDictionary.Add (o,cubobj);
-			Debug.Log (o + ": " + cubobjDictionary[o]);
+			//Debug.Log (o + ": " + cubobjDictionary[o]);
 			i++;
 		}
 	}
@@ -45,11 +45,11 @@ public class objectDictionary : MonoBehaviour {
 		
 		objectQuant = Random.Range(0, (likes/10));
 
-		Debug.Log ("Number of objects: " + objectQuant);
+		//Debug.Log ("Number of objects: " + objectQuant);
 
 		for(int i = 0; i <= objectQuant; i++)
 		{
-			Debug.Log ("yolo: " + objectQuant);
+			//Debug.Log ("yolo: " + objectQuant);
 			quantity.generateObject(objectQuant);
 		}
 	}
