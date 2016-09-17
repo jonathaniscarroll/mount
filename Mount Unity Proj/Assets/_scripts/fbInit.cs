@@ -12,7 +12,7 @@ public class fbInit : MonoBehaviour {
 	private Dictionary<string,object> PostDetails;
 	private Dictionary<string,object> FBName;
 	private string fbID;
-	private List<string> likeList;
+	private List<List<string>> likeList;
 	private List<string> postList;
 
 	private int likeCount;
@@ -24,7 +24,7 @@ public class fbInit : MonoBehaviour {
 	public objectDictionary ObjectGeneration;
 	public phpComm phpCommunication;
 	public bool start;
-	public Dictionary<string,string> recentLikePerPost;
+	public Dictionary<string,string> likePerPost;
 
 	public string likeID;
 	public string postID;
@@ -32,19 +32,19 @@ public class fbInit : MonoBehaviour {
 	public string get_data;
 	public string userName;
 
-	public bool newLike;
+	public bool newPost;
 
 	// Awake function from Unity's MonoBehavior
 	void Awake ()
 	{
 		start = false;
-		newLike = true;
+		newPost = true;
 		GameEngine = gameObject.GetComponent<game_engine>();
 		CubicleGeneration = gameObject.GetComponent<cubicleGeneration> ();
 		ObjectGeneration = gameObject.GetComponent<objectDictionary> ();
 		phpCommunication = gameObject.GetComponent<phpComm> ();
 
-		recentLikePerPost = new Dictionary<string,string> ();
+		likePerPost = new Dictionary<string,string> ();
 		postList = new List<string> ();
 		likeList = new List<string> ();
 
@@ -102,12 +102,12 @@ public class fbInit : MonoBehaviour {
 
 		FBUserDetails = (Dictionary<string,object>)result.ResultDictionary;
 
-		var postList = new List<object> ();
-		postList = (List<object>)(FBUserDetails["data"]);
+		var postresultList = new List<object> ();
+		postresultList = (List<object>)(FBUserDetails["data"]);
 
 		//Debug.Log ("POST LIST: "+postList.Count);
 
-		foreach(object keyValue in postList)
+		foreach(object keyValue in postresultList)
 		{
 			var post = keyValue as Dictionary<string,object>;
 			postID = post ["id"].ToString();
@@ -132,25 +132,32 @@ public class fbInit : MonoBehaviour {
 		PostDetails = (Dictionary<string,object>)result.ResultDictionary;
 		var postParts = new List<object> ();
 		postParts = (List<object>)(PostDetails["data"]);
-		//Debug.Log("This Post Like Count: "+postParts.Count ());
-		newLike = true;
+		Debug.Log("This Post Like Count: "+postParts.Count ());
+		newPost = true;
 
-		foreach(object keyValue in postParts)
-		{
-			likes = keyValue as Dictionary<string,object>;
-			likeID = likes ["id"].ToString();
+		//need to determine if post has any likes or not
 
-			//Debug.Log (likesID);
-			//if it is the first like of this post, add the the list of first likes
-			if (newLike == true) {
-				likeList.Add(likeID);
-				newLike = false;
-			} 
-			i = i + 1;
-			likeCount++;
-			//Debug.Log ("LIKE ID: "  + likesID + ", TOTAL LIKE COUNT:" + likeCount + ", THIS POST LIKE COUNT: " + i);
+		if (postParts.Count () == 0) {
+			//post has no likes, need to register a 0 in the like list 
+			likeList.Add ("0"); 
+		} else {
+			foreach (object keyValue in postParts) {
+				likes = keyValue as Dictionary<string,object>;
+				likeID = likes ["id"].ToString ();
 
+				//Debug.Log (likeID);
+				//if it is the first like of this post, add the the list of first likes
+				if (newPost == true) {
+					likeList.Add (likeID);
+					newPost = false;
+				} 
+				i = i + 1;
+				likeCount++;
+				//Debug.Log ("LIKE ID: "  + likesID + ", TOTAL LIKE COUNT:" + likeCount + ", THIS POST LIKE COUNT: " + i);
+
+			}
 		}
+			
 
 		GameEngine.likes = likeCount;
 		GameEngine.setText ();
@@ -158,14 +165,33 @@ public class fbInit : MonoBehaviour {
 		postNumber++;
 
 		if (postNumber >= postCount && start == false) {
-			foreach(KeyValuePair<string, string> entry in recentLikePerPost)
-			{
-				Debug.Log (entry);
-			}
-
-			phpCommunication.collectNameAndLikes();
+			
+//			int x = 0;
+//			int y = 0;
+//			foreach (string post in postList) {
+//				Debug.Log ("number: " + x + ", post: " + post);
+//				x++;
+//			}
+//
+//			foreach (string like in likeList) {
+//				Debug.Log ("number: " + y + ", like: " + like);
+//				y++;
+//			}
+//			phpCommunication.collectNameAndLikes();
 			start = true;
 			ObjectGeneration.populateCubicles (likeCount);
+			createLikePostDict ();
+		}
+	}
+
+	void createLikePostDict(){
+		for (int x = 0; x < postCount; x++) {
+			likePerPost.Add (postList [x], likeList [x]);
+		}
+
+		foreach (KeyValuePair<string,string> postlike in likePerPost)
+		{
+			Debug.Log("post: " + postlike.Key + " like: " + postlike.Value);
 		}
 	}
 
